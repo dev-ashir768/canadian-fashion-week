@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guestlist | Canadian Fashion Week</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="/images/nk-logo.svg" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header Layer -->
+    <header
+      id="main-header"
+      class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 md:px-12 lg:px-16 transition-all duration-500 transition-colors"
+    >
+      <div class="logo">
+        <a href="/" class="block">
+          <img
+            id="header-logo"
+            src="images/updated-logo.png"
+            alt="Canadian Fashion Week"
+            class="h-8 md:h-10 lg:h-16 transition-all duration-500"
+          />
+        </a>
+      </div>
+      <button
+        id="nav-toggle"
+        class="group flex items-center gap-4 cursor-pointer z-[100]"
+      >
+        <div class="flex flex-col gap-1.5 w-6">
+          <span id="line-1" class="h-[1px] w-full bg-black transition-all duration-500"></span>
+          <span id="line-2" class="h-[1px] w-full bg-black transition-all duration-500"></span>
+        </div>
+      </button>
+    </header>
+
+    <!-- Side Navigation -->
+    <div
+      id="nav-overlay"
+      class="fixed inset-0 bg-black/60 z-[60] opacity-0 invisible backdrop-blur-sm"
+    ></div>
+    <nav id="side-nav" class="px-12 py-6">
+      <div class="flex justify-end md:mb-12">
+        <button id="nav-close" class="group flex items-center gap-4 cursor-pointer">
+          <div class="relative w-6 h-6 flex items-center justify-center">
+            <span class="absolute h-[1px] w-full bg-black rotate-45"></span>
+            <span class="absolute h-[1px] w-full bg-black -rotate-45"></span>
+          </div>
+        </button>
+      </div>
+      <div class="flex flex-col md:gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
+        <a href="schedule.html" class="group flex items-center justify-between border-b border-gray-300 pb-4 nav-bounce-hover">
+          <span class="text-xl font-bold text-black uppercase tracking-tighter">Schedule</span>
+        </a>
+        <a href="guestlist.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover">Guestlist</a>
+        <a href="privacy-policy.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover">Privacy Policy</a>
+        <a href="accessibility.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover">Accessibility</a>
+        <a href="contact-us.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover">Contact</a>
+        <a href="about.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover">About</a>
+      </div>
+    </nav>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const logo = document.getElementById("header-logo");
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+      const sideNav = document.getElementById("side-nav");
+      const navOverlay = document.getElementById("nav-overlay");
+
+      function toggleNav() {
+        sideNav.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        document.body.classList.toggle("overflow-hidden");
+      }
+
+      navToggle.addEventListener("click", toggleNav);
+      navClose.addEventListener("click", toggleNav);
+      navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+        } else {
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+        }
+      };
+    </script>
+
+    <main class="pt-40 pb-24 bg-white min-h-screen">
+      <div class="container mx-auto">
+        <!-- Hero Block -->
+        <div class="mb-16 animate-fade-in-up">
+          <p class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-6 font-bold">
+            Canadian Fashion Week — Exclusive Access
+          </p>
+          <h1 class="text-5xl md:text-7xl font-bold text-black tracking-tighter leading-[1] uppercase mb-2">
+            Guestlist.
+          </h1>
+        </div>
+
+        <!-- Invite-Only Notice -->
+        <div class="border-t border-gray-200 pt-12 mb-20 animate-fade-in-up max-w-3xl" style="animation-delay: 0.1s">
+          <p class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-6 font-bold">
+            By Invitation Only
+          </p>
+          <p class="text-gray-600 text-[15px] md:text-lg leading-relaxed tracking-wide mb-6">
+            Canadian Fashion Week is an exclusive, invite-only event. Attendance is curated for designers, press, industry professionals, and invited guests.
+          </p>
+          <p class="text-gray-600 text-[15px] md:text-lg leading-relaxed tracking-wide">
+            Subscribe below to receive ticket updates and be considered for future invitations when they become available.
+          </p>
+        </div>
+
+        <!-- Subscription Form -->
+        <div class="animate-fade-in-up max-w-2xl" style="animation-delay: 0.2s">
+          <p class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-12 font-bold">
+            Request Ticket Updates
+          </p>
+          <form data-cfw-form novalidate class="space-y-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+              <div class="relative group">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="FIRST NAME"
+                  class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
+                />
+              </div>
+              <div class="relative group">
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="LAST NAME"
+                  class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
+                />
+              </div>
+            </div>
+
+            <div class="relative group">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
+              />
+            </div>
+
+            <div class="relative group">
+              <select
+                name="role"
+                required
+                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors text-gray-500 uppercase appearance-none cursor-pointer"
+              >
+                <option value="" disabled selected>I AM A...</option>
+                <option value="general" class="text-black">General Guest</option>
+                <option value="press" class="text-black">Press / Media</option>
+                <option value="designer" class="text-black">Designer</option>
+                <option value="industry" class="text-black">Industry Professional</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              class="bg-black text-white px-16 py-5 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-black/80 transition-all uppercase cursor-pointer"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer
+      class="bg-black text-white pt-20 pb-12 px-6 md:px-12 lg:px-13 border-t border-white/10"
+    >
+      <div class="container mx-auto flex flex-col lg:flex-row gap-20 lg:gap-32">
+        <!-- Newsletter Section -->
+        <div class="flex-1 max-w-2xl">
+          <h2 class="text-3xl md:text-5xl font-light tracking-wider mb-12 uppercase">
+            Stay In The Know
+          </h2>
+          <form data-cfw-form novalidate class="space-y-12">
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="FIRST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="LAST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+            </div>
+            <div class="relative">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-white text-black px-14 py-4 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-white/90 transition-all uppercase cursor-pointer"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="flex flex-col md:flex-row gap-16 lg:gap-32">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 lg:gap-32">
+            <ul class="space-y-6">
+              <li>
+                <a href="privacy-policy.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Cookie Policy</a>
+              </li>
+              <li>
+                <a href="#" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Press</a>
+              </li>
+              <li>
+                <a href="#" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Health &amp; Safety</a>
+              </li>
+              <li>
+                <a href="#" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Terms Of Use</a>
+              </li>
+            </ul>
+            <ul class="space-y-6 text-nowrap">
+              <li>
+                <a href="about.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">About</a>
+              </li>
+              <li>
+                <a href="accessibility.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Accessibility</a>
+              </li>
+              <li>
+                <a href="contact-us.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Contact</a>
+              </li>
+              <li>
+                <a href="do-not-sell.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase leading-loose">Do Not Sell My<br class="hidden sm:block" /> Personal Info</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div
+        class="container mx-auto mt-15 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-end gap-12"
+      >
+        <div class="max-w-2xl">
+          <p class="text-[9px] md:text-[10px] leading-relaxed text-white tracking-[0.15em]">
+            By subscribing you consent to receive newsletters, updates, special
+            offers, and other updates from Canadian Fashion Week: The Shows, and
+            their respective partners, licensees, affiliates, and subsidiaries.
+            You may withdraw your consent at any time.
+            <a href="privacy-policy.html" class="underline underline-offset-4 hover:text-white transition-colors">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-10 items-center">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/canadianfashionweekoffcial?igsh=anZvanVnNnkxbmFx" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity text-white">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+    <script src="js/forms.js"></script>
+  </body>
+</html>

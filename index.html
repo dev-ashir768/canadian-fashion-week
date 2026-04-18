@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CFW | Canadian Fashion Week</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="/images/nk-logo.svg" type="image/x-icon" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-black text-white font-sans selection:bg-white/20">
+    <!-- Header Layer -->
+    <header
+      id="main-header"
+      class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 md:px-12 lg:px-16 transition-all duration-500 transition-colors"
+    >
+      <div class="logo">
+        <a href="/" class="block">
+          <img
+            id="header-logo"
+            src="images/updated-logo.png"
+            alt="Canadian Fashion Week"
+            class="h-8 md:h-10 lg:h-16 invert transition-all duration-500"
+          />
+        </a>
+      </div>
+      <nav id="header-nav">
+        <button
+          id="nav-toggle"
+          class="group flex items-center gap-4 cursor-pointer z-[100]"
+        >
+          <!-- <span
+            id="menu-text"
+            class="nav-link text-white text-[10px] md:text-xs tracking-[0.3em] font-medium transition-all duration-500 group-hover:opacity-60 uppercase"
+            >Menu</span
+          > -->
+          <div class="flex flex-col gap-1.5 w-6">
+            <span
+              id="line-1"
+              class="h-[1px] w-full bg-white transition-all duration-500"
+            ></span>
+            <span
+              id="line-2"
+              class="h-[1px] w-full bg-white transition-all duration-500"
+            ></span>
+          </div>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Side Navigation -->
+    <div
+      id="nav-overlay"
+      class="fixed inset-0 bg-black/60 z-[60] opacity-0 invisible backdrop-blur-sm"
+    ></div>
+    <nav id="side-nav" class="px-12 py-6">
+      <div class="flex justify-end md:mb-12">
+        <button
+          id="nav-close"
+          class="group flex items-center gap-4 cursor-pointer"
+        >
+          <!-- <span
+            class="text-black text-[10px] tracking-[0.3em] font-bold uppercase transition-all duration-500 group-hover:opacity-40"
+            >Close</span
+          > -->
+          <div class="relative w-6 h-6 flex items-center justify-center">
+            <span class="absolute h-[1px] w-full bg-black rotate-45"></span>
+            <span class="absolute h-[1px] w-full bg-black -rotate-45"></span>
+          </div>
+        </button>
+      </div>
+
+      <div class="flex flex-col md:gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
+        <a
+          href="schedule.html"
+          class="group flex items-center justify-between border-b border-gray-300 pb-4 nav-bounce-hover"
+        >
+          <span class="text-xl font-bold text-black uppercase tracking-tighter"
+            >Schedule</span
+          >
+        </a>
+        <a
+          href="guestlist.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >Guestlist</a
+        >
+        <a
+          href="privacy-policy.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >Privacy Policy</a
+        >
+        <a
+          href="accessibility.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >Accessibility</a
+        >
+        <a
+          href="contact-us.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >Contact</a
+        >
+        <a
+          href="about.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >About</a
+        >
+      </div>
+    </nav>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const logo = document.getElementById("header-logo");
+      const menuText = document.getElementById("menu-text");
+      const line1 = document.getElementById("line-1");
+      const line2 = document.getElementById("line-2");
+
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+      const sideNav = document.getElementById("side-nav");
+      const navOverlay = document.getElementById("nav-overlay");
+
+      function toggleNav() {
+        sideNav.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        document.body.classList.toggle("overflow-hidden");
+      }
+
+      navToggle.addEventListener("click", toggleNav);
+      navClose.addEventListener("click", toggleNav);
+      navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+          logo.classList.remove("invert");
+          line1.classList.replace("bg-white", "bg-black");
+          line2.classList.replace("bg-white", "bg-black");
+        } else {
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+          logo.classList.add("invert");
+          line1.classList.replace("bg-black", "bg-white");
+          line2.classList.replace("bg-black", "bg-white");
+        }
+      };
+    </script>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen w-full overflow-hidden flex flex-col">
+      <!-- Background Images with Overlay -->
+      <!-- Background Images with Overlay -->
+      <div id="hero-slider" class="absolute inset-0 z-0">
+        <!-- Slide 1 (Active by default) -->
+        <picture>
+          <source
+            srcset="images/potrait-banner-1.jpeg"
+            media="(max-width: 425px)"
+          />
+          <img
+            src="images/cfw-banner-1.jpeg"
+            id="slide-0"
+            alt="Fashion Week Banner 1"
+            class="absolute inset-0 object-cover transition-opacity duration-1000 opacity-100"
+          />
+        </picture>
+        <!-- Slide 2 (Hidden by default) -->
+        <picture>
+          <source
+            srcset="images/potrait-banner-2.jpeg"
+            media="(max-width: 425px)"
+          />
+          <img
+            src="images/cfw-banner-2.jpeg"
+            id="slide-1"
+            alt="Fashion Week Banner 2"
+            class="absolute inset-0 object-cover transition-opacity duration-1000 opacity-0"
+          />
+        </picture>
+
+        <!-- Multi-layer gradient -->
+        <div
+          class="absolute inset-0 bg-black/30 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none"
+        ></div>
+      </div>
+
+      <!-- Central Content Layer -->
+      <main
+        class="relative z-10 flex-grow flex flex-col items-center justify-center text-center px-6 md:px-12 pointer-events-none"
+      >
+        <!-- <div class="max-w-4xl animate-fade-in-up">
+          <h1
+            class="text-white text-2xl md:text-3xl lg:text-5xl font-bold mb-6 uppercase"
+          >
+            CFW SS2026 Season Schedule
+          </h1>
+          <p
+            class="text-white/90 text-[10px] md:text-xs lg:text-sm tracking-[0.25em] mb-12 uppercase font-medium max-w-2xl mx-auto"
+          >
+            Stay up to date on the latest schedule for the season
+          </p>
+          <a
+            href="schedule.html"
+            class="inline-block px-12 py-3.5 border border-white/80 text-white text-[10px] md:text-xs tracking-[0.3em] font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-500 uppercase"
+          >
+            Learn More
+          </a>
+        </div> -->
+      </main>
+
+      <!-- Slider Pagination (Bottom Right) -->
+      <div class="absolute bottom-12 right-10 md:right-16 z-20 flex gap-4">
+        <button
+          class="pagination-dot w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white cursor-pointer transition-all hover:scale-125"
+          data-index="0"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          class="pagination-dot w-2 md:w-2.5 h-2 md:h-2.5 rounded-full border border-white/60 cursor-pointer transition-all hover:border-white hover:scale-125"
+          data-index="1"
+          aria-label="Slide 2"
+        ></button>
+      </div>
+    </section>
+
+    <!-- Simplified Slideshow Script -->
+    <script>
+      let currentSlide = 0;
+      const slides = [
+        document.getElementById("slide-0"),
+        document.getElementById("slide-1"),
+      ];
+      const dots = document.querySelectorAll(".pagination-dot");
+
+      function showSlide(index) {
+        // Toggle opacity classes
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.replace("opacity-0", "opacity-100");
+          } else {
+            slide.classList.replace("opacity-100", "opacity-0");
+          }
+        });
+
+        // Toggle dot focus
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add("bg-white");
+            dot.classList.remove("border", "border-white/60");
+          } else {
+            dot.classList.remove("bg-white");
+            dot.classList.add("border", "border-white/60");
+          }
+        });
+
+        currentSlide = index;
+      }
+
+      // Simple Click Events
+      dots.forEach((dot, i) => {
+        dot.onclick = () => showSlide(i);
+      });
+
+      // Simple Auto-cycle
+      setInterval(() => {
+        showSlide((currentSlide + 1) % slides.length);
+      }, 6000);
+
+      // Click to advance slide
+      const heroSlider = document.getElementById("hero-slider");
+      heroSlider.style.cursor = "pointer";
+      heroSlider.addEventListener("click", () => {
+        showSlide((currentSlide + 1) % slides.length);
+      });
+
+      // Touch swipe + tap support
+      let touchStartX = 0;
+      let touchStartY = 0;
+      heroSlider.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      heroSlider.addEventListener("touchend", (e) => {
+        const diffX = touchStartX - e.changedTouches[0].clientX;
+        const diffY = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(diffX) > 50) {
+          // swipe
+          if (diffX > 0) {
+            showSlide((currentSlide + 1) % slides.length);
+          } else {
+            showSlide((currentSlide - 1 + slides.length) % slides.length);
+          }
+        } else if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
+          // tap — advance to next slide
+          showSlide((currentSlide + 1) % slides.length);
+        }
+      }, { passive: true });
+    </script>
+
+    <!-- Basic Animation Utilities -->
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 1s ease-out forwards;
+      }
+    </style>
+
+    <!-- Experience Section -->
+    <section class="bg-white py-24 lg:py-25">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <!-- Image Column -->
+          <div class="flex-1 w-full order-2 lg:order-1">
+            <div class="relative group">
+              <!-- Decorative border -->
+              <div
+                class="absolute -top-4 -left-4 w-full h-full border border-gray-200 -z-10 transition-all duration-700 group-hover:top-0 group-hover:left-0"
+              ></div>
+              <img
+                src="images/runway.png"
+                alt="Fashion Week Experience"
+                class="w-full aspect-[4/5] object-cover shadow-2xl animate-fade-in-up"
+              />
+            </div>
+          </div>
+
+          <!-- Text Column -->
+          <div class="flex-1 order-1 lg:order-2">
+            <div class="max-w-xl animate-fade-in-up">
+              <p
+                class="text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-5 font-bold"
+              >
+                The Spirit of CFW
+              </p>
+              <h2
+                class="text-4xl md:text-5xl lg:text-6xl font-bold text-black tracking-tight uppercase leading-[1.1] mb-8"
+              >
+                Elevating the Runway
+              </h2>
+              <div class="w-20 h-0.5 bg-black mb-10"></div>
+              <p
+                class="text-gray-600 text-[13px] md:text-base tracking-wide leading-loose mb-12"
+              >
+                Where tradition meets modern innovation. Explore the essence of
+                Canadian fashion as we showcase the labels defining tomorrow's
+                trends. From avant-garde creations to modern tailoring,
+                experience the creative pulse that drives the global industry.
+              </p>
+              <!-- <a
+                href="#"
+                class="inline-block bg-white border border-black text-black px-12 py-3.5 rounded-full text-[10px] tracking-[0.3em] font-bold hover:bg-black hover:text-white transition-all duration-500 uppercase cursor-pointer"
+              >
+                Find Out More
+              </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Designers Section -->
+
+    <section class="bg-white py-24 md:py-25">
+      <div class="container mx-auto">
+        <!-- Section Header -->
+        <div class="text-center mb-20 px-4">
+          <p class="text-[13px] tracking-[0.4em] text-gray-700 uppercase mb-5">
+            Season Highlights
+          </p>
+          <h2
+            class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-8 uppercase"
+          >
+            Discover the Designers
+          </h2>
+          <p
+            class="text-[13px] md:text-base text-gray-600 max-w-2xl mx-auto tracking-wide leading-relaxed"
+          >
+            Explore the pioneering minds shaping the future of global fashion.
+          </p>
+        </div>
+
+        <!-- Designers Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+          <!-- Designer 1 -->
+          <div
+            class="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer animate-fade-in-up"
+          >
+            <img
+              src="images/designer-1.png"
+              alt="Maison Margiela"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 lg:p-10"
+            >
+              <!-- <p
+                class="text-[10px] tracking-[0.3em] text-white/70 uppercase mb-3 font-medium translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500"
+              >
+                Maison Margiela
+              </p> -->
+              <h3 class="text-1xl lg:text-2xl font-bold text-white uppercase">
+                Avant-Garde Echoes
+              </h3>
+              <!-- <a
+                href="#"
+                class="inline-flex items-center text-[10px] tracking-[0.3em] text-white font-bold uppercase transition-all duration-300 hover:text-white/70"
+              >
+                View Collection <span class="ml-3">→</span>
+              </a> -->
+            </div>
+          </div>
+          <!-- Designer 2 -->
+          <div
+            class="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer animate-fade-in-up"
+          >
+            <img
+              src="images/designer-2.png"
+              alt="Ethereal Edge"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 lg:p-10"
+            >
+              <h3 class="text-1xl lg:text-2xl font-bold text-white uppercase">
+                Ethereal Edge
+              </h3>
+            </div>
+          </div>
+          <!-- Designer 3 -->
+          <div
+            class="group relative aspect-[3/4] overflow-hidden bg-gray-100 cursor-pointer animate-fade-in-up"
+          >
+            <img
+              src="images/designer-3.png"
+              alt="Modern Tailoring"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 lg:p-10"
+            >
+              <h3 class="text-1xl lg:text-2xl font-bold text-white uppercase">
+                Modern Tailoring
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center mt-20">
+          <a
+            href="#"
+            class="inline-block bg-black text-white px-14 py-4 rounded-full text-[13px] tracking-[0.4em] font-semibold hover:bg-gray-700 transition-all uppercase cursor-pointer"
+          >
+            View Full Roster
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+
+    <footer
+      class="bg-black text-white pt-20 pb-12 px-6 md:px-12 lg:px-13 border-t border-white/10"
+    >
+      <div class="container mx-auto flex flex-col lg:flex-row gap-20 lg:gap-32">
+        <!-- Newsletter Section -->
+        <div class="flex-1 max-w-2xl">
+          <h2
+            class="text-3xl md:text-5xl font-light tracking-wider mb-12 uppercase"
+          >
+            Stay In The Know
+          </h2>
+          <form data-cfw-form novalidate class="space-y-12">
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="FIRST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="LAST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+            </div>
+            <div class="relative">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-white text-black px-14 py-4 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-white/90 transition-all uppercase cursor-pointer"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="flex flex-col md:flex-row gap-16 lg:gap-32">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 lg:gap-32">
+            <ul class="space-y-6">
+              <li>
+                <a
+                  href="privacy-policy.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Cookie Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Press</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Health & Safety</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Terms Of Use</a
+                >
+              </li>
+            </ul>
+            <ul class="space-y-6 text-nowrap">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="accessibility.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Accessibility</a
+                >
+              </li>
+              <li>
+                <a
+                  href="contact-us.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a
+                  href="do-not-sell.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase leading-loose"
+                  >Do Not Sell My<br class="hidden sm:block" />
+                  Personal Info</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div
+        class="container mx-auto mt-15 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-end gap-12"
+      >
+        <div class="max-w-2xl">
+          <p
+            class="text-[9px] md:text-[10px] leading-relaxed text-white tracking-[0.15em]"
+          >
+            By subscribing you consent to receive newsletters, updates, special
+            offers, and other updates from Canadian Fashion Week: The Shows, and
+            their respective partners, licensees, affiliates, and subsidiaries.
+            You may withdraw your consent at any time.
+            <a
+              href="#"
+              class="underline underline-offset-4 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >.
+          </p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-10 items-center">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/canadianfashionweekoffcial?igsh=anZvanVnNnkxbmFx" target="_blank" rel="noopener noreferrer" class="hover:opacity-70 transition-opacity text-white">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+    <script src="js/forms.js"></script>
+  </body>
+</html>
