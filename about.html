@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="/images/nk-logo.svg" type="image/x-icon" />
 
@@ -92,6 +93,11 @@
           >
         </a>
         <a
+          href="guestlist.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
+          >Guestlist</a
+        >
+        <a
           href="privacy-policy.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
           >Privacy Policy</a
@@ -111,7 +117,6 @@
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 pb-4 nav-bounce-hover"
           >About</a
         >
-
       </div>
 
       
@@ -355,7 +360,7 @@
           >
             Stay In The Know
           </h2>
-          <form data-cfw-form novalidate class="space-y-12">
+          <form data-cfw-form data-parsley-validate novalidate class="space-y-12">
             <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
               <div class="flex-1 relative">
                 <input
@@ -482,7 +487,7 @@
             their respective partners, licensees, affiliates, and subsidiaries.
             You may withdraw your consent at any time.
             <a
-              href="#"
+              href="privacy-policy.html"
               class="underline underline-offset-4 hover:text-white transition-colors"
               >Privacy Policy</a
             >.

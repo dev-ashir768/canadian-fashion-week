@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="/images/nk-logo.svg" type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -205,7 +207,7 @@
           <h2 class="text-3xl md:text-5xl font-light tracking-wider mb-12 uppercase">
             Stay In The Know
           </h2>
-          <form data-cfw-form novalidate class="space-y-12">
+          <form data-cfw-form data-parsley-validate novalidate class="space-y-12">
             <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
               <div class="flex-1 relative">
                 <input type="text" name="firstName" required placeholder="FIRST NAME" class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase" />
