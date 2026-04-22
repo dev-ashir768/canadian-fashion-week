@@ -1,10 +1,10 @@
 (function ($) {
   function showToast(firstName) {
-    var existing = document.getElementById("cfw-toast");
+    var existing = document.getElementById("cfp-toast");
     if (existing) existing.remove();
 
     var toast = document.createElement("div");
-    toast.id = "cfw-toast";
+    toast.id = "cfp-toast";
     Object.assign(toast.style, {
       position: "fixed",
       bottom: "2rem",
@@ -60,8 +60,8 @@
       window.Parsley.setLocale("en");
     }
 
-    // Initialize all forms with data-cfw-form
-    $("form[data-cfw-form]").each(function () {
+    // Initialize all forms with data-cfp-form
+    $("form[data-cfp-form]").each(function () {
       var $form = $(this);
       var pInstance = $form.parsley();
 
@@ -72,12 +72,14 @@
         // Manually trigger validation
         if (pInstance.validate()) {
           var values = {};
-          $form.find("input[name], textarea[name], select[name]").each(function () {
-            values[this.name] = $(this).val().trim();
-          });
+          $form
+            .find("input[name], textarea[name], select[name]")
+            .each(function () {
+              values[this.name] = $(this).val().trim();
+            });
 
-          console.log("[CFW] Validated Form Submission Success:", values);
-          
+          console.log("[CFP] Validated Form Submission Success:", values);
+
           // Show the success toast
           showToast(values.firstName || "Guest");
 
@@ -85,12 +87,9 @@
           $form[0].reset();
           pInstance.reset();
         } else {
-          console.log("[CFW] Form Validation Failed");
+          console.log("[CFP] Form Validation Failed");
         }
       });
     });
   });
 })(jQuery);
-
-
-
