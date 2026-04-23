@@ -48,12 +48,12 @@
           border-radius: 8px;
       }
       .custom-file-upload:hover {
-          border-color: #C50A76;
-          background: #fdf2f8;
+          border-color: #000;
+          background: #f3f4f6;
       }
     </style>
 </head>
-<body class="bg-black text-white font-sans selection:bg-[#C50A76]/20">
+<body class="bg-black text-white font-sans selection:bg-white/20">
     <!-- Header Layer -->
     <header
       id="main-header"
@@ -114,7 +114,7 @@
         <a href="accessibility.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Accessibility</a>
         <a href="contact-us.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Contact</a>
         <a href="about.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">About</a>
-        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover text-[#C50A76]">Application</a>
+        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover text-black">Application</a>
       </div>
     </nav>
 
@@ -152,7 +152,7 @@
       <div class="container mx-auto max-w-4xl px-4">
         <div class="text-center mb-12 animate-fade-in-up">
            <h1 class="text-4xl md:text-5xl font-bold text-black tracking-tighter uppercase mb-4">Application Form</h1>
-           <div class="h-1 w-24 bg-[#C50A76] mx-auto mb-6"></div>
+           <div class="h-1 w-24 bg-black mx-auto mb-6"></div>
            <p class="text-gray-600 text-sm md:text-base max-w-2xl mx-auto uppercase tracking-wider">
                Please fill out the details below to apply. Your requirements may change based on your designation.
            </p>
@@ -167,7 +167,7 @@
                 name="designation"
                 id="designation"
                 required
-                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm appearance-none cursor-pointer"
+                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 text-sm appearance-none cursor-pointer"
               >
                 <option value="" disabled selected>Select an option that best represents you</option>
                 <option value="designer">Designer</option>
@@ -185,7 +185,7 @@
                   name="firstName"
                   required
                   placeholder="e.g. Oz"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
                 />
               </div>
               <div class="relative group">
@@ -195,7 +195,7 @@
                   name="lastName"
                   required
                   placeholder="e.g. Kahn"
-                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
                 />
               </div>
             </div>
@@ -208,7 +208,7 @@
                   type="text"
                   name="address"
                   required
-                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 text-sm"
                 />
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -218,7 +218,7 @@
                     type="text"
                     name="city"
                     required
-                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 text-sm"
                   />
                 </div>
                 <div class="relative group">
@@ -227,7 +227,7 @@
                     type="text"
                     name="postalCode"
                     required
-                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 text-sm"
                   />
                 </div>
               </div>
@@ -242,7 +242,7 @@
                     name="email"
                     required
                     placeholder="e.g. email@example.com"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
                   />
                 </div>
                 <div class="relative group">
@@ -255,7 +255,7 @@
                     data-parsley-length="[10, 10]"
                     data-parsley-length-message="This value should be a valid 10 digit phone number"
                     placeholder="e.g. 5555555555"
-                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
                   />
                 </div>
             </div>
@@ -282,7 +282,7 @@
             <div class="pt-6">
               <button
                 type="submit"
-                class="w-full bg-[#C50A76] text-white px-8 py-5 uppercase tracking-[0.2em] text-sm font-bold rounded-full shadow-lg hover:bg-[#a0085f] transition-all duration-300 cursor-pointer"
+                class="w-full bg-black text-white px-8 py-5 uppercase tracking-[0.2em] text-sm font-bold rounded-full shadow-lg hover:bg-black/80 transition-all duration-300 cursor-pointer"
               >
                 Submit Application
               </button>
@@ -476,7 +476,7 @@ $fileInput.attr('accept', 'image/*');
                        title: 'Limit Reached',
                        text: 'You can only upload a maximum of 4 files.',
                        icon: 'warning',
-                       confirmButtonColor: '#C50A76'
+                       confirmButtonColor: '#000'
                      });
                      break;
               }
@@ -562,7 +562,7 @@ $fileInput.attr('accept', 'image/*');
           Swal.fire({
            title: 'Success!',            text: 'Application submitted successfully!',
              icon: 'success',
-             confirmButtonColor: '#C50A76'
+             confirmButtonColor: '#000'
            });
          });
        });
