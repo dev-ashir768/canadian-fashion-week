@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application | Canadian Fashion Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css" />
+    <link rel="icon" href="/images/white-logo.png" type="image/x-icon" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Poppins", sans-serif;
+      }
+      
+      .parsley-errors-list {
+          list-style-type: none;
+          padding: 0;
+          margin-top: 0.5rem;
+          font-size: 0.75rem;
+          color: #ef4444;
+          font-weight: 500;
+      }
+      .parsley-error {
+          border-color: #ef4444 !important;
+          border-width: 2px !important;
+          background-color: #f9fafb !important;
+          color: #1f2937 !important;
+      }
+      .custom-file-upload {
+          border: 1px dashed #e5e7eb;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: #f9fafb;
+          border-radius: 8px;
+      }
+      .custom-file-upload:hover {
+          border-color: #C50A76;
+          background: #fdf2f8;
+      }
+    </style>
+</head>
+<body class="bg-black text-white font-sans selection:bg-[#C50A76]/20">
+    <!-- Header Layer -->
+    <header
+      id="main-header"
+      class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 md:px-12 lg:px-16 transition-all duration-500 transition-colors"
+    >
+      <div class="logo">
+        <a href="/" class="block">
+          <img
+            id="header-logo"
+            src="images/white-logo.png"
+            alt="Canadian Fashion Project"
+           class="h-8 md:h-10 lg:h-16 transition-all duration-500"
+          />
+        </a>
+      </div>
+      <button
+        id="nav-toggle"
+        class="group flex items-center gap-4 cursor-pointer z-[100]"
+      >
+        <div class="flex flex-col gap-1.5 w-6">
+          <span
+            id="line-1"
+            class="h-[1px] w-full bg-black transition-all duration-500"
+          ></span>
+          <span
+            id="line-2"
+            class="h-[1px] w-full bg-black transition-all duration-500"
+          ></span>
+        </div>
+      </button>
+      </nav>
+    </header>
+
+    <!-- Side Navigation -->
+    <div
+      id="nav-overlay"
+      class="fixed inset-0 bg-black/60 z-[60] opacity-0 invisible backdrop-blur-sm"
+    ></div>
+    <nav id="side-nav" class="px-12 py-6">
+      <div class="flex justify-end md:mb-12">
+        <button
+          id="nav-close"
+          class="group flex items-center gap-4 cursor-pointer"
+        >
+          <div class="relative w-6 h-6 flex items-center justify-center">
+            <span class="absolute h-[1px] w-full bg-black rotate-45"></span>
+            <span class="absolute h-[1px] w-full bg-black -rotate-45"></span>
+          </div>
+        </button>
+      </div>
+
+    <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
+        <a href="schedule.html" class="group flex items-center justify-between border-b border-gray-300 pb-4 nav-bounce-hover">
+          <span class="text-xl font-bold text-black uppercase tracking-tighter">Schedule</span>
+        </a>
+        <a href="guestlist.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Guestlist</a>
+        <a href="privacy-policy.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Privacy Policy</a>
+        <a href="accessibility.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Accessibility</a>
+        <a href="contact-us.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Contact</a>
+        <a href="about.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">About</a>
+        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover text-[#C50A76]">Application</a>
+      </div>
+    </nav>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const logo = document.getElementById("header-logo");
+
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+      const sideNav = document.getElementById("side-nav");
+      const navOverlay = document.getElementById("nav-overlay");
+
+      function toggleNav() {
+        sideNav.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        document.body.classList.toggle("overflow-hidden");
+      }
+
+      navToggle.addEventListener("click", toggleNav);
+      navClose.addEventListener("click", toggleNav);
+      navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+        } else {
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+        }
+      };
+    </script>
+    
+    <main class="pt-40 pb-24 bg-gray-50 min-h-[70vh] relative z-10">
+      <div class="container mx-auto max-w-4xl px-4">
+        <div class="text-center mb-12 animate-fade-in-up">
+           <h1 class="text-4xl md:text-5xl font-bold text-black tracking-tighter uppercase mb-4">Application Form</h1>
+           <div class="h-1 w-24 bg-[#C50A76] mx-auto mb-6"></div>
+           <p class="text-gray-600 text-sm md:text-base max-w-2xl mx-auto uppercase tracking-wider">
+               Please fill out the details below to apply. Your requirements may change based on your designation.
+           </p>
+        </div>
+
+        <form id="application-form" data-parsley-validate novalidate class="space-y-8 bg-white p-8 md:p-12 shadow-sm rounded-xl border border-gray-100 animate-fade-in-up" style="animation-delay: 0.2s;">
+            
+            <!-- Designation -->
+            <div class="relative group">
+              <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">What is your designation? *</label>
+              <select
+                name="designation"
+                id="designation"
+                required
+                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm appearance-none cursor-pointer"
+              >
+                <option value="" disabled selected>Select an option that best represents you</option>
+                <option value="designer">Designer</option>
+                <option value="model">Model</option>
+                <option value="volunteer">Volunteer</option>
+              </select>
+            </div>
+
+            <!-- Name -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="relative group">
+                <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">First Name *</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="e.g. Oz"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                />
+              </div>
+              <div class="relative group">
+                <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Last Name *</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="e.g. Kahn"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                />
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="space-y-6">
+              <div class="relative group">
+                <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Street Address *</label>
+                <input
+                  type="text"
+                  name="address"
+                  required
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                />
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="relative group">
+                  <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">City *</label>
+                  <input
+                    type="text"
+                    name="city"
+                    required
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                  />
+                </div>
+                <div class="relative group">
+                  <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Postal Code *</label>
+                  <input
+                    type="text"
+                    name="postalCode"
+                    required
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone & Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="relative group">
+                  <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Email *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="e.g. email@example.com"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                  />
+                </div>
+                <div class="relative group">
+                  <label class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Phone *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    data-parsley-type="digits"
+                    data-parsley-length="[10, 10]"
+                    data-parsley-length-message="This value should be a valid 10 digit phone number"
+                    placeholder="e.g. 5555555555"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-4 outline-none focus:border-[#C50A76] focus:ring-1 focus:ring-[#C50A76] transition-colors text-gray-800 placeholder:text-gray-400 text-sm"
+                  />
+                </div>
+            </div>
+
+            <!-- Dynamic File Upload -->
+            <div id="file-upload-container" class="relative group" style="display: none;">
+              <label id="file-upload-label" class="block text-xs font-bold text-gray-700 mb-2 tracking-widest uppercase">Upload File</label>
+              <label for="file-upload-input" class="custom-file-upload">
+                <svg class="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                <span id="file-upload-text" class="text-sm text-gray-500 font-medium">Click to upload (Up to 4 files)</span>
+              </label>
+              <input
+                id="file-upload-input"
+                type="file"
+                name="uploadFile[]"
+                class="hidden"
+                accept="image/*,.pdf"
+                multiple
+              />
+              <div id="image-preview-container" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 w-full"></div>
+            </div>
+
+            <!-- Submit -->
+            <div class="pt-6">
+              <button
+                type="submit"
+                class="w-full bg-[#C50A76] text-white px-8 py-5 uppercase tracking-[0.2em] text-sm font-bold rounded-full shadow-lg hover:bg-[#a0085f] transition-all duration-300 cursor-pointer"
+              >
+                Submit Application
+              </button>
+            </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer
+      class="bg-black text-white pt-20 pb-12 px-6 md:px-12 lg:px-13 border-t border-white/10"
+    >
+      <div class="container mx-auto flex flex-col lg:flex-row gap-20 lg:gap-32">
+        <!-- Newsletter Section -->
+        <div class="flex-1 max-w-2xl">
+          <h2
+            class="text-3xl md:text-5xl font-light tracking-wider mb-12 uppercase"
+          >
+            Stay In The Know
+          </h2>
+          <form data-cfp-form data-parsley-validate novalidate class="space-y-12">
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="FIRST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="LAST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+            </div>
+            <div class="relative">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-white text-black px-14 py-4 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-white/90 transition-all uppercase cursor-pointer"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="flex flex-col md:flex-row gap-16 lg:gap-32">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 lg:gap-32">
+            <ul class="space-y-6 text-nowrap">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="accessibility.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Accessibility</a
+                >
+              </li>
+              <li>
+                <a
+                  href="privacy-policy.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="do-not-sell.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase leading-loose"
+                  >Do Not Sell My<br />
+                  Personal Info</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div
+        class="container mx-auto mt-15 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-end gap-12"
+      >
+        <div class="max-w-2xl">
+          <p
+            class="text-[9px] md:text-[10px] leading-relaxed text-white tracking-[0.15em]"
+          >
+            By subscribing you consent to receive newsletters, updates, special
+            offers, and other updates from Canadian Fashion Project: The Shows, and
+            their respective partners, licensees, affiliates, and subsidiaries.
+            You may withdraw your consent at any time.
+            <a
+               href="/privacy-policy.html"
+              class="underline underline-offset-4 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >.
+          </p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-10 items-center">
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/canadianfashionweekoffcial?igsh=anZvanVnNnkxbmFx"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-70 transition-opacity text-white"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"
+           />
+             </svg>
+           </a>
+         </div>
+       </div>
+     </footer>
+     <!-- SweetAlert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+     <script src="js/forms.js"></script>
+     
+     <!-- Application Form Scripts -->
+     <script>
+       $(document).ready(function() {
+         const $designation = $('#designation');
+         const $fileContainer = $('#file-upload-container');
+         const $fileLabel = $('#file-upload-label');
+         const $fileInput = $('#file-upload-input');
+         const $fileText = $('#file-upload-text');
+
+         $designation.on('change', function() {
+           const val = $(this).val();
+           
+           if (val === 'model') {
+             $fileContainer.slideDown();
+             $fileLabel.text('Upload Image (Headshot) *');
+$fileInput.attr('required', true);
+$fileInput.attr('accept', 'image/*');
+           } else if (val === 'designer') {
+             $fileContainer.slideDown();
+             $fileLabel.text('Upload Look Book *');
+             $fileInput.attr('required', true);
+             $fileInput.attr('accept', 'image/*,.pdf');
+           } else {
+             $fileContainer.slideUp();
+             $fileInput.removeAttr('required');
+           }
+         });
+
+         let base64Files = [];
+         const fileDataTransfer = new DataTransfer();
+         $fileInput.on('change', function(e) {
+           const files = e.target.files;
+           
+           // Accumulate new files
+           for (let i = 0; i < files.length; i++) {
+             // Check if file is already added to prevent duplicates
+             let isDuplicate = false;
+           for (let j = 0; j < fileDataTransfer.items.length; j++) {
+               if (fileDataTransfer.items[j].getAsFile().name === files[i].name) {
+                     isDuplicate = true; break;
+                 }
+           }
+            
+             if (!isDuplicate) {
+             if (fileDataTransfer.items.length < 4) {
+                  fileDataTransfer.items.add(files[i]);
+                } else {
+                     Swal.fire({
+                       title: 'Limit Reached',
+                       text: 'You can only upload a maximum of 4 files.',
+                       icon: 'warning',
+                       confirmButtonColor: '#C50A76'
+                     });
+                     break;
+              }
+}
+}
+
+        // Update input files
+           $fileInput[0].files = fileDataTransfer.files;
+           const currentFiles = $fileInput[0].files;
+ 
+           const $previewContainer = $('#image-preview-container');
+           $previewContainer.empty();
+         base64Files = [];
+
+         if (currentFiles.length === 1) {
+             $fileText.text(currentFiles[0].name);
+      } else if (currentFiles.length > 1) {
+             $fileText.text(currentFiles.length + ' files selected');
+           } else {
+         $fileText.text('Click to upload (Up to 4 files)');
+           }
+ 
+       Array.from(currentFiles).forEach(file => {
+             const reader = new FileReader();
+             reader.onload = function(event) {
+          const base64String = event.target.result;
+               base64Files.push({
+                 name: file.name,
+                 type: file.type,
+                 size: file.size,
+                 base64: base64String
+               });
+ 
+          if (file.type.startsWith('image/')) {
+                 $previewContainer.append(`
+                   <div class="relative rounded-lg overflow-hidden border border-gray-200 aspect-square shadow-sm">
+                     <img src="${base64String}" class="w-full h-full object-cover" alt="Preview" />
+                   </div>
+                 `);
+               } else if (file.type === 'application/pdf') {
+                  $previewContainer.append(`
+                   <div class="relative rounded-lg overflow-hidden border border-gray-200 aspect-square flex items-center justify-center bg-gray-50 text-gray-400 shadow-sm">
+                     <div class="text-center">
+                       <svg class="w-8 h-8 mx-auto mb-1 text-red-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path></svg>
+                       <div class="text-[10px] truncate px-2 max-w-[100px]">${file.name}</div>
+                     </div>
+                   </div>
+                 `);
+               }
+             };
+             reader.readAsDataURL(file);
+           });
+         });
+ 
+         $('#application-form').on('submit', function(e) {
+           e.preventDefault();
+           
+           if (!$(this).parsley().isValid()) {
+              return;
+           }
+ 
+           const formDataArray = $(this).serializeArray();
+           const formDataObj = {};
+           formDataArray.forEach(item => {
+               if(item.name !== 'uploadFile[]') {
+                   formDataObj[item.name] = item.value;
+               }
+           });
+ 
+           formDataObj.files = base64Files;
+          // Reset Form Data
+       $(this)[0].reset();
+          $(this).parsley().reset();
+          // Reset File Upload State
+          fileDataTransfer.items.clear();
+          base64Files = [];
+          $('#image-preview-container').empty();
+          $fileText.text('Click to upload (Up to 4 files)');
+          $fileInput.val('');
+          $fileContainer.slideUp();
+       
+          // Show Success SweetAlert
+          Swal.fire({
+           title: 'Success!',            text: 'Application submitted successfully!',
+             icon: 'success',
+             confirmButtonColor: '#C50A76'
+           });
+         });
+       });
+     </script>
+</body>
+</html>
