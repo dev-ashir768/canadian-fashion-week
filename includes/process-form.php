@@ -96,7 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tr>";
     }
 
-    $logo_url = "https://canadianfashionweek.ca/images/white-logo.png"; // Fallback URL or relative if absolute needed
+    $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
+    $logo_url = $base_url . "/images/white-logo.png";
 
     $admin_email_content = "
     <body style='margin: 0; padding: 0; background-color: #f4f7f9;'>
@@ -138,16 +139,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 2. User Confirmation Email Template
     if (!empty($user_email)) {
         $is_newsletter = (stripos($form_type, 'know') !== false || stripos($form_type, 'newsletter') !== false);
-        
-        $user_subject = $is_newsletter ? "Welcome to Canadian Fashion Week!" : "Thank you for contacting Canadian Fashion Week!";
-        
-        $thank_you_msg = $is_newsletter 
-            ? "Thank you for joining our exclusive community! You're now subscribed to <strong>Stay In The Know</strong>."
-            : "Thank you for reaching out to <strong>Canadian Fashion Week</strong>. We have received your $form_type and our team will review it shortly.";
-        
-        $sub_msg = $is_newsletter
-            ? "You'll be the first to receive updates on season schedules, exclusive guestlists, and behind-the-scenes content."
-            : "We appreciate your interest and will get back to you as soon as possible.";
+        $is_guestlist = (stripos($form_type, 'guestlist') !== false);
+
+        $user_subject = $is_newsletter ? "Welcome to Canadian Fashion Week!" : ($is_guestlist ? "Guestlist Request Received!" : "Thank you for contacting Canadian Fashion Week!");
+
+        if ($is_newsletter) {
+            $thank_you_msg = "Thank you for joining our exclusive community! You're now subscribed to <strong>Stay In The Know</strong>.";
+            $sub_msg = "You'll be the first to receive updates on season schedules, exclusive guestlists, and behind-the-scenes content.";
+        } elseif ($is_guestlist) {
+            $thank_you_msg = "We've successfully received your request for the <strong>Guestlist</strong>.";
+            $sub_msg = "Our team will review your application and if approved, you will receive a formal invitation with further details.";
+        } else {
+            $thank_you_msg = "Thank you for reaching out to <strong>Canadian Fashion Week</strong>. We have received your $form_type and our team will review it shortly.";
+            $sub_msg = "We appreciate your interest and will get back to you as soon as possible.";
+        }
 
         $user_email_content = "
         <body style='margin: 0; padding: 0; background-color: #f4f7f9;'>
