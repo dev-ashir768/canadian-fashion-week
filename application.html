@@ -540,24 +540,6 @@ $fileInput.attr('accept', 'image/*');
          });
  
          $('#application-form').on('submit', function(e) {
-           e.preventDefault();
-           
-           if (!$(this).parsley().isValid()) {
-              return;
-           }
- 
-           const formDataArray = $(this).serializeArray();
-           const formDataObj = {};
-           formDataArray.forEach(item => {
-               if(item.name !== 'uploadFile[]') {
-                   formDataObj[item.name] = item.value;
-               }
-           });
- 
-           formDataObj.files = base64Files;
-          // Reset Form Data
-       $(this)[0].reset();
-          $(this).parsley().reset();
             e.preventDefault();
             
             if (!$(this).parsley().isValid()) {

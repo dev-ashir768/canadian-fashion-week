@@ -9,9 +9,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Configuration
-$admin_email = 'toolgrram3@gmail.com'; 
-$smtp_user = 'toolgrram3@gmail.com';
-$smtp_pass = 'akjki9kj555=--';
+$admin_email = 'info@canadianfashionproject.com';
+$smtp_user = 'toolgram3@gmail.com';
+$smtp_pass = 'fihwrjdzscwhxixy';
 
 // PHPMailer configuration
 use PHPMailer\PHPMailer\PHPMailer;
@@ -24,17 +24,18 @@ require 'PHPMailer/SMTP.php';
 /**
  * Helper function to send email via SMTP
  */
-function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week', $attachments = []) {
+function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week', $attachments = [])
+{
     global $smtp_user, $smtp_pass;
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $smtp_user;
-        $mail->Password   = $smtp_pass;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $smtp_user;
+        $mail->Password = $smtp_pass;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port = 587;
 
         $mail->setFrom($smtp_user, $from_name);
         $mail->addAddress($to);
@@ -59,7 +60,7 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
 
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $mail->Body    = $message;
+        $mail->Body = $message;
         $mail->AltBody = strip_tags(str_replace(['<br>', '<br/>', '</p>'], "\n", $message));
 
         $mail->send();
@@ -73,11 +74,11 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form_type = $_POST['form_type'] ?? 'General Inquiry';
     $timestamp = date('Y-m-d H:i:s');
-    
+
     // Collect data
     $data = $_POST;
     unset($data['form_type']); // Remove helper field
-    
+
     // Determine the user's email for the greeting
     $user_email = $_POST['email'] ?? '';
     $first_name = $_POST['firstName'] ?? $_POST['first_name'] ?? 'Guest';
@@ -176,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tr>
             </table>
         </body>";
-        
+
         sendEmail($user_email, $user_subject, $user_email_content, 'Canadian Fashion Week');
     }
 
