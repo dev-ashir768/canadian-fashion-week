@@ -83,7 +83,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_email = $_POST['email'] ?? '';
     $first_name = $_POST['firstName'] ?? $_POST['first_name'] ?? 'Guest';
 
-    // 1. Admin Notification Email Template
+    // 1. Save to CSV
+    if (!file_exists('../data')) {
+        mkdir('../data', 0755, true);
+    }
+    
+    $csv_file = "../data/submissions_" . preg_replace('/[^a-zA-Z0-9_]/', '', strtolower($form_type)) . ".csv";
+    $file_handle = fopen($csv_file, 'a');
+    
+    if ($file_handle) {
+        // Add headers if file is new
+        if (filesize($csv_file) === 0) {
+            $headers = ['Timestamp', 'Form Type'];
+            foreach ($data as $key => $value) {
+                $headers[] = ucwords(str_replace(['_', '-'], ' ', $key));
+            }
+            fputcsv($file_handle, $headers);
+        }
+        
+        $row = [$timestamp, $form_type];
+        foreach ($data as $value) {
+            if (is_array($value)) $value = implode('; ', $value);
+            $row[] = str_replace(["\r", "\n", ","], [" ", " ", ";"], $value);
+        }
+        fputcsv($file_handle, $row);
+        fclose($file_handle);
+    }
+
+    // 2. Admin Notification Email Template
     $details_html = "";
     foreach ($data as $key => $value) {
         $label = ucwords(str_replace(['_', '-'], ' ', $key));
