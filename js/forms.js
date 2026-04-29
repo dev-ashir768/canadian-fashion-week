@@ -60,16 +60,27 @@
       window.Parsley.setLocale("en");
     }
 
+    console.log("[CFP] Forms JS Loaded and Ready");
+
     // Initialize all forms with data-cfp-form using event delegation
     $(document).on("submit", "form[data-cfp-form]", function (e) {
+      console.log("[CFP] Form submit detected");
+      
       // ALWAYS prevent default first to stop redirects
       e.preventDefault();
+      e.stopPropagation();
       
       var $form = $(this);
-      var pInstance = $form.parsley();
+      
+      // Check if Parsley is available and valid
+      var isValid = true;
+      if (typeof $.fn.parsley !== 'undefined') {
+        var pInstance = $form.parsley();
+        isValid = pInstance.validate();
+      }
 
       // Manually trigger validation
-      if (pInstance.validate()) {
+      if (isValid) {
         var $submitBtn = $form.find('button[type="submit"]');
         var originalBtnText = $submitBtn.text();
 
@@ -85,15 +96,17 @@
           "Website Form";
         formData.append("form_type", formTitle.trim());
 
+        console.log("[CFP] Sending AJAX request for:", formTitle);
+
         $.ajax({
           url: "includes/process-form.php",
           type: "POST",
           data: formData,
           processData: false,
           contentType: false,
-          dataType: 'json', // Explicitly expect JSON
+          dataType: 'json',
           success: function (response) {
-            console.log("[CFP] Form Submission Success:", response);
+            console.log("[CFP] Success response:", response);
 
             if (response.status === "success") {
               if (typeof Swal !== "undefined") {
@@ -112,10 +125,13 @@
                 showToast(firstName);
               }
 
-              // Reset the form and Parsley state
+              // Reset the form
               $form[0].reset();
-              pInstance.reset();
+              if (typeof $.fn.parsley !== 'undefined') {
+                $form.parsley().reset();
+              }
             } else {
+              console.error("[CFP] Server error:", response.message);
               if (typeof Swal !== "undefined") {
                 Swal.fire({
                   title: "ERROR",
@@ -129,7 +145,7 @@
             }
           },
           error: function (xhr, status, error) {
-            console.error("[CFP] Form Submission Error:", error);
+            console.error("[CFP] AJAX Error:", status, error);
             console.log("[CFP] Response Text:", xhr.responseText);
             
             if (typeof Swal !== "undefined") {
@@ -151,6 +167,8 @@
       } else {
         console.log("[CFP] Form Validation Failed");
       }
+      
+      return false; // Extra precaution to prevent submission
     });
   });
 })(jQuery);
