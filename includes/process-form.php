@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Configuration
-$admin_email = 'info@canadianfashionproject.com';
+$admin_email = 'techashir167@gmail.com';
 $smtp_user = 'toolgram3@gmail.com';
 $smtp_pass = 'fihwrjdzscwhxixy';
 
