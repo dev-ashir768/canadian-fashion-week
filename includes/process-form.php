@@ -170,8 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </table>
         </body>";
 
-        $admin_subject = "CFW | New $form_type from $first_name";
-        sendEmail($admin_email, $admin_subject, $admin_email_content, 'CFW Notification System', $_FILES);
+        $admin_subject = "CFP | New $form_type from $first_name";
+        sendEmail($admin_email, $admin_subject, $admin_email_content, 'CFP Notification System', $_FILES);
 
         // 2. User Confirmation Email Template
         if (!empty($user_email)) {
@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div style='margin-top: 50px; padding-top: 30px; border-top: 1px solid #eeeeee;'>
                                             <p style='font-family: sans-serif; font-size: 14px; color: #999999; margin: 0;'>
                                                 Best regards,<br>
-                                                <span style='color: #1a1a1a; font-weight: 600;'>The CFW Team</span><br>
+                                                <span style='color: #1a1a1a; font-weight: 600;'>The CFP Team</span><br>
                                                 <a href='https://canadianfashionproject.com' style='color: #000; text-decoration: none;'>canadianfashionproject.com</a>
                                             </p>
                                         </div>
