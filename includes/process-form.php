@@ -67,8 +67,7 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
         $mail->send();
         return true;
     } catch (Exception $e) {
-        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        return false;
+        throw new Exception("Mailer Error: {$mail->ErrorInfo}");
     }
 }
 
