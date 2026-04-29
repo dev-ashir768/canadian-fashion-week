@@ -137,7 +137,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. User Confirmation Email Template
     if (!empty($user_email)) {
-        $user_subject = "Thank you for contacting Canadian Fashion Week!";
+        $is_newsletter = (stripos($form_type, 'know') !== false || stripos($form_type, 'newsletter') !== false);
+        
+        $user_subject = $is_newsletter ? "Welcome to Canadian Fashion Week!" : "Thank you for contacting Canadian Fashion Week!";
+        
+        $thank_you_msg = $is_newsletter 
+            ? "Thank you for joining our exclusive community! You're now subscribed to <strong>Stay In The Know</strong>."
+            : "Thank you for reaching out to <strong>Canadian Fashion Week</strong>. We have received your $form_type and our team will review it shortly.";
+        
+        $sub_msg = $is_newsletter
+            ? "You'll be the first to receive updates on season schedules, exclusive guestlists, and behind-the-scenes content."
+            : "We appreciate your interest and will get back to you as soon as possible.";
+
         $user_email_content = "
         <body style='margin: 0; padding: 0; background-color: #f4f7f9;'>
             <table width='100%' border='0' cellspacing='0' cellpadding='0' style='background-color: #f4f7f9; padding: 40px 20px;'>
@@ -153,10 +164,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <td style='padding: 50px; text-align: center;'>
                                     <h1 style='font-family: sans-serif; font-size: 28px; font-weight: 700; color: #000; margin: 0 0 20px 0;'>Hello $first_name,</h1>
                                     <p style='font-family: sans-serif; font-size: 16px; line-height: 1.6; color: #333333; margin: 0 0 25px 0;'>
-                                        Thank you for reaching out to <strong>Canadian Fashion Week</strong>. We have received your $form_type and our team will review it shortly.
+                                        $thank_you_msg
                                     </p>
                                     <p style='font-family: sans-serif; font-size: 15px; color: #666666; margin: 0 0 35px 0;'>
-                                        We appreciate your interest and will get back to you as soon as possible.
+                                        $sub_msg
                                     </p>
                                     <a href='https://canadianfashionweek.ca' style='display: inline-block; background-color: #000; color: #ffffff; padding: 16px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;'>Visit Website</a>
                                     
