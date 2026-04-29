@@ -60,43 +60,38 @@
       window.Parsley.setLocale("en");
     }
 
-    console.log("[CFP] Forms JS Loaded and Ready");
+    console.log("[CFP] Forms JS Version 1.2 Initializing");
 
-    // Initialize all forms with data-cfp-form using event delegation
-    $(document).on("submit", "form[data-cfp-form]", function (e) {
-      console.log("[CFP] Form submit detected");
-      
-      // ALWAYS prevent default first to stop redirects
-      e.preventDefault();
-      e.stopPropagation();
-      
+    // Use a very broad selector to catch all forms and then filter
+    $(document).on("submit", "form", function (e) {
       var $form = $(this);
       
-      // Check if Parsley is available and valid
-      var isValid = true;
-      if (typeof $.fn.parsley !== 'undefined') {
-        var pInstance = $form.parsley();
-        isValid = pInstance.validate();
+      // Only process if it has our data attribute
+      if ($form.attr('data-cfp-form') === undefined && $form.attr('id') !== 'application-form') {
+        return; 
       }
 
-      // Manually trigger validation
-      if (isValid) {
-        var $submitBtn = $form.find('button[type="submit"]');
-        var originalBtnText = $submitBtn.text();
+      console.log("[CFP] Form submission detected from:", $form.attr('data-cfp-form') || $form.attr('id'));
+      
+      e.preventDefault();
+      e.stopPropagation();
 
-        // Disable button and show loading state
-        $submitBtn.prop("disabled", true).text("SENDING...");
+      var $submitBtn = $form.find('button[type="submit"]');
+      var originalBtnText = $submitBtn.text();
 
+      // Disable button and show loading state
+      $submitBtn.prop("disabled", true).text("SENDING...");
+
+      try {
         var formData = new FormData(this);
-        // Add form type based on nearest heading or context if not specified
-        var formTitle =
-          $form.prevAll("h1, h2").first().text() ||
-          $form.parent().prevAll("h1, h2").first().text() ||
-          $form.closest("main, section").find("h1, h2").first().text() ||
-          "Website Form";
+        var formTitle = $form.prevAll("h1, h2").first().text() || 
+                        $form.parent().prevAll("h1, h2").first().text() || 
+                        $form.closest('main, section').find('h1, h2').first().text() ||
+                        "Website Form";
+        
         formData.append("form_type", formTitle.trim());
 
-        console.log("[CFP] Sending AJAX request for:", formTitle);
+        console.log("[CFP] Attempting AJAX request to includes/process-form.php");
 
         $.ajax({
           url: "includes/process-form.php",
@@ -107,68 +102,47 @@
           dataType: 'json',
           success: function (response) {
             console.log("[CFP] Success response:", response);
-
             if (response.status === "success") {
               if (typeof Swal !== "undefined") {
                 Swal.fire({
                   title: "THANK YOU!",
                   text: response.message,
                   icon: "success",
-                  confirmButtonColor: "#000",
-                  customClass: {
-                    popup: "rounded-2xl",
-                    confirmButton: "rounded-full px-8 py-3 uppercase tracking-widest text-xs",
-                  },
+                  confirmButtonColor: "#000"
                 });
               } else {
-                var firstName = $form.find('input[name="firstName"]').val() || "Guest";
-                showToast(firstName);
+                alert("Thank you! Your message has been sent.");
               }
-
-              // Reset the form
               $form[0].reset();
-              if (typeof $.fn.parsley !== 'undefined') {
-                $form.parsley().reset();
-              }
             } else {
-              console.error("[CFP] Server error:", response.message);
-              if (typeof Swal !== "undefined") {
-                Swal.fire({
-                  title: "ERROR",
-                  text: response.message || "Something went wrong.",
-                  icon: "error",
-                  confirmButtonColor: "#000",
-                });
-              } else {
-                alert("Something went wrong: " + response.message);
-              }
+              throw new Error(response.message || "Server returned failure status");
             }
           },
           error: function (xhr, status, error) {
             console.error("[CFP] AJAX Error:", status, error);
             console.log("[CFP] Response Text:", xhr.responseText);
-            
             if (typeof Swal !== "undefined") {
               Swal.fire({
-                title: "CONNECTION ERROR",
-                text: "An error occurred. Please try again later.",
+                title: "SUBMISSION ERROR",
+                text: "Could not send message. Please check your connection.",
                 icon: "error",
-                confirmButtonColor: "#000",
+                confirmButtonColor: "#000"
               });
             } else {
-              alert("An error occurred. Please try again later.");
+              alert("Error: Could not send message.");
             }
           },
           complete: function () {
-            // Restore button state
             $submitBtn.prop("disabled", false).text(originalBtnText);
-          },
+          }
         });
-      } else {
-        console.log("[CFP] Form Validation Failed");
+      } catch (err) {
+        console.error("[CFP] Script Error:", err);
+        $submitBtn.prop("disabled", false).text(originalBtnText);
+        alert("An unexpected error occurred. Please try again.");
       }
-      
-      return false; // Extra precaution to prevent submission
+
+      return false;
     });
   });
 })(jQuery);
