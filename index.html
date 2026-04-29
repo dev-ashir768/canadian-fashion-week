@@ -120,8 +120,13 @@
         <a
           href="about.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >About</a>
-        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Application</a>
+          >About</a
+        >
+        <a
+          href="application.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Application</a
+        >
       </div>
     </nav>
 
@@ -151,7 +156,6 @@
         if (window.scrollY > 50) {
           header.classList.add("bg-white", "shadow-md", "py-3");
           header.classList.remove("py-6");
-    
         } else {
           header.classList.remove("bg-white", "shadow-md", "py-3");
           header.classList.add("py-6");
@@ -159,16 +163,13 @@
       };
     </script>
     <!-- Hero Section -->
-    <section class="relative min-h-screen  w-full overflow-hidden flex flex-col">
+    <section class="relative min-h-screen w-full overflow-hidden flex flex-col">
       <!-- Background Images with Overlay -->
       <!-- Background Images with Overlay -->
-      <div  class="absolute inset-0 z-0">
+      <div class="absolute inset-0 z-0">
         <!-- Slide 1 (Active by default) -->
         <picture>
-          <source
-            srcset="/images/abc.jpeg"
-            media="(max-width: 425px)"
-          />
+          <source srcset="/images/abc.jpeg" media="(max-width: 425px)" />
           <img
             src="/images/cfw-banner-2.jpeg"
             id="slide-0"
@@ -178,19 +179,16 @@
         </picture>
         <!-- Slide 2 (Hidden by default) -->
         <picture>
-          <source
-            srcset="/images/abc.jpeg"
-            media="(max-width: 425px)"
-          />
+          <source srcset="/images/abc.jpeg" media="(max-width: 425px)" />
           <img
             src="/images/cfw-banner-2.jpeg"
             id="slide-1"
             alt="Fashion Week Banner 2"
             class="absolute object-cover transition-opacity duration-1000 opacity-0 w-full"
-          /> 
+          />
         </picture>
 
-        <!-- Multi-layer gradient --> 
+        <!-- Multi-layer gradient -->
         <!-- <div
           class="absolute inset-0 bg-black/30 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
         ></div>
@@ -489,59 +487,203 @@
       </div>
     </section>
 
-        <!-- Sponsored Section -->
-    <section
-      class="py-16 bg-white border-t border-gray-100 overflow-hidden"
-    >
+    <!-- Sponsored Section -->
+    <section class="py-16 bg-white border-t border-gray-100 overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 mb-10 text-center">
-        <h3 class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">
+        <h3
+          class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400"
+        >
           Sponsored By
         </h3>
       </div>
       <div class="relative flex">
         <div class="marquee-container space-x-16 items-center px-8">
           <!-- Set 1 -->
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
           <!-- Set 2 -->
-            <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
           <!-- Set 3 -->
-  <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
           <!-- Set 4 -->
-  <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
           <!-- Set 5 -->
-         <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
           <!-- Set 6 -->
-           <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/masala-whisky.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
-          <img src="images/sponsor/sponsor-2.png" alt="Masala Whisky" class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100" />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/masala-whisky.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/sponsor-2.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />
+          <img
+            src="images/sponsor/m-models.png"
+            alt="Masala Whisky"
+            class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all duration-500 opacity-40 hover:opacity-100"
+          />>
         </div>
       </div>
     </section>
@@ -611,10 +753,15 @@
                 <a
                   href="about.html"
                   class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
-                  >About</a>
+                  >About</a
+                >
               </li>
               <li>
-                <a href="application.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Application</a>
+                <a
+                  href="application.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Application</a
+                >
               </li>
               <li>
                 <a
