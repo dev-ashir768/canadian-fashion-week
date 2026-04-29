@@ -60,99 +60,97 @@
       window.Parsley.setLocale("en");
     }
 
-    // Initialize all forms with data-cfp-form
-    $("form[data-cfp-form]").each(function () {
+    // Initialize all forms with data-cfp-form using event delegation
+    $(document).on("submit", "form[data-cfp-form]", function (e) {
+      // ALWAYS prevent default first to stop redirects
+      e.preventDefault();
+      
       var $form = $(this);
       var pInstance = $form.parsley();
 
-      $form.on("submit", function (e) {
-        // ALWAYS prevent default first to stop redirects
-        e.preventDefault();
+      // Manually trigger validation
+      if (pInstance.validate()) {
+        var $submitBtn = $form.find('button[type="submit"]');
+        var originalBtnText = $submitBtn.text();
 
-        // Manually trigger validation
-        if (pInstance.validate()) {
-          var $submitBtn = $form.find('button[type="submit"]');
-          var originalBtnText = $submitBtn.text();
+        // Disable button and show loading state
+        $submitBtn.prop("disabled", true).text("SENDING...");
 
-          // Disable button and show loading state
-          $submitBtn.prop("disabled", true).text("SENDING...");
+        var formData = new FormData(this);
+        // Add form type based on nearest heading or context if not specified
+        var formTitle =
+          $form.prevAll("h1, h2").first().text() ||
+          $form.parent().prevAll("h1, h2").first().text() ||
+          $form.closest("main, section").find("h1, h2").first().text() ||
+          "Website Form";
+        formData.append("form_type", formTitle.trim());
 
-          var formData = new FormData(this);
-          // Add form type based on nearest heading or context if not specified
-          var formTitle =
-            $form.prevAll("h1, h2").first().text() ||
-            $form.parent().prevAll("h1, h2").first().text() ||
-            $form.closest("main, section").find("h1, h2").first().text() ||
-            "Website Form";
-          formData.append("form_type", formTitle.trim());
+        $.ajax({
+          url: "includes/process-form.php",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: 'json', // Explicitly expect JSON
+          success: function (response) {
+            console.log("[CFP] Form Submission Success:", response);
 
-          $.ajax({
-            url: "includes/process-form.php",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-              console.log("[CFP] Form Submission Success:", response);
-
-              if (response.status === "success") {
-                var firstName =
-                  $form.find('input[name="firstName"]').val() || "Guest";
-
-                if (typeof Swal !== "undefined") {
-                  Swal.fire({
-                    title: "THANK YOU!",
-                    text: response.message,
-                    icon: "success",
-                    confirmButtonColor: "#000",
-                    customClass: {
-                      popup: "rounded-2xl",
-                      confirmButton:
-                        "rounded-full px-8 py-3 uppercase tracking-widest text-xs",
-                    },
-                  });
-                } else {
-                  showToast(firstName);
-                }
-
-                // Reset the form and Parsley state
-                $form[0].reset();
-                pInstance.reset();
-              } else {
-                if (typeof Swal !== "undefined") {
-                  Swal.fire({
-                    title: "ERROR",
-                    text: response.message || "Something went wrong.",
-                    icon: "error",
-                    confirmButtonColor: "#000",
-                  });
-                } else {
-                  alert("Something went wrong: " + response.message);
-                }
-              }
-            },
-            error: function (xhr, status, error) {
-              console.error("[CFP] Form Submission Error:", error);
+            if (response.status === "success") {
               if (typeof Swal !== "undefined") {
                 Swal.fire({
-                  title: "CONNECTION ERROR",
-                  text: "An error occurred. Please try again later.",
+                  title: "THANK YOU!",
+                  text: response.message,
+                  icon: "success",
+                  confirmButtonColor: "#000",
+                  customClass: {
+                    popup: "rounded-2xl",
+                    confirmButton: "rounded-full px-8 py-3 uppercase tracking-widest text-xs",
+                  },
+                });
+              } else {
+                var firstName = $form.find('input[name="firstName"]').val() || "Guest";
+                showToast(firstName);
+              }
+
+              // Reset the form and Parsley state
+              $form[0].reset();
+              pInstance.reset();
+            } else {
+              if (typeof Swal !== "undefined") {
+                Swal.fire({
+                  title: "ERROR",
+                  text: response.message || "Something went wrong.",
                   icon: "error",
                   confirmButtonColor: "#000",
                 });
               } else {
-                alert("An error occurred. Please try again later.");
+                alert("Something went wrong: " + response.message);
               }
-            },
-            complete: function () {
-              // Restore button state
-              $submitBtn.prop("disabled", false).text(originalBtnText);
-            },
-          });
-        } else {
-          console.log("[CFP] Form Validation Failed");
-        }
-      });
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("[CFP] Form Submission Error:", error);
+            console.log("[CFP] Response Text:", xhr.responseText);
+            
+            if (typeof Swal !== "undefined") {
+              Swal.fire({
+                title: "CONNECTION ERROR",
+                text: "An error occurred. Please try again later.",
+                icon: "error",
+                confirmButtonColor: "#000",
+              });
+            } else {
+              alert("An error occurred. Please try again later.");
+            }
+          },
+          complete: function () {
+            // Restore button state
+            $submitBtn.prop("disabled", false).text(originalBtnText);
+          },
+        });
+      } else {
+        console.log("[CFP] Form Validation Failed");
+      }
     });
   });
 })(jQuery);
