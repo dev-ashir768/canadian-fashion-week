@@ -5,8 +5,9 @@
  */
 
 // Error Reporting for Debugging (Set to 0 in production)
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+error_reporting(0);
+ini_set('display_errors', 0);
+header('Content-Type: application/json');
 
 // Configuration
 $admin_email = 'techashir167@gmail.com';
@@ -87,10 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!file_exists('../data')) {
         mkdir('../data', 0755, true);
     }
-    
+
     $csv_file = "../data/submissions_" . preg_replace('/[^a-zA-Z0-9_]/', '', strtolower($form_type)) . ".csv";
     $file_handle = fopen($csv_file, 'a');
-    
+
     if ($file_handle) {
         // Add headers if file is new
         if (filesize($csv_file) === 0) {
@@ -100,10 +101,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             fputcsv($file_handle, $headers);
         }
-        
+
         $row = [$timestamp, $form_type];
         foreach ($data as $value) {
-            if (is_array($value)) $value = implode('; ', $value);
+            if (is_array($value))
+                $value = implode('; ', $value);
             $row[] = str_replace(["\r", "\n", ","], [" ", " ", ";"], $value);
         }
         fputcsv($file_handle, $row);
