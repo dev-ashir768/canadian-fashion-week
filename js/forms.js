@@ -73,75 +73,81 @@
         if (pInstance.validate()) {
           var $submitBtn = $form.find('button[type="submit"]');
           var originalBtnText = $submitBtn.text();
-          
+
           // Disable button and show loading state
-          $submitBtn.prop('disabled', true).text('SENDING...');
+          $submitBtn.prop("disabled", true).text("SENDING...");
 
           var formData = new FormData(this);
           // Add form type based on nearest heading or context if not specified
-          var formTitle = $form.prevAll('h1, h2').first().text() || "Website Form";
-          formData.append('form_type', formTitle.trim());
+          var formTitle =
+            $form.prevAll("h1, h2").first().text() ||
+            $form.parent().prevAll("h1, h2").first().text() ||
+            $form.closest("main, section").find("h1, h2").first().text() ||
+            "Website Form";
+          formData.append("form_type", formTitle.trim());
 
           $.ajax({
-            url: 'includes/process-form.php',
-            type: 'POST',
+            url: "includes/process-form.php",
+            type: "POST",
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
               console.log("[CFP] Form Submission Success:", response);
-              
-              if (response.status === 'success') {
-                var firstName = $form.find('input[name="firstName"]').val() || "Guest";
-                
-                if (typeof Swal !== 'undefined') {
+
+              if (response.status === "success") {
+                var firstName =
+                  $form.find('input[name="firstName"]').val() || "Guest";
+
+                if (typeof Swal !== "undefined") {
                   Swal.fire({
-                    title: 'THANK YOU!',
+                    title: "THANK YOU!",
                     text: response.message,
-                    icon: 'success',
-                    confirmButtonColor: '#000',
+                    icon: "success",
+                    confirmButtonColor: "#000",
                     customClass: {
-                      popup: 'rounded-2xl',
-                      confirmButton: 'rounded-full px-8 py-3 uppercase tracking-widest text-xs'
-                    }
+                      popup: "rounded-2xl",
+                      confirmButton:
+                        "rounded-full px-8 py-3 uppercase tracking-widest text-xs",
+                    },
                   });
                 } else {
                   showToast(firstName);
                 }
-                
+
                 // Reset the form and Parsley state
                 $form[0].reset();
                 pInstance.reset();
               } else {
-                if (typeof Swal !== 'undefined') {
+                if (typeof Swal !== "undefined") {
                   Swal.fire({
-                    title: 'ERROR',
-                    text: response.message || 'Something went wrong.',
-                    icon: 'error',
-                    confirmButtonColor: '#000'
+                    title: "ERROR",
+                    text: response.message || "Something went wrong.",
+                    icon: "error",
+                    confirmButtonColor: "#000",
                   });
                 } else {
-                  alert('Something went wrong: ' + response.message);
+                  alert("Something went wrong: " + response.message);
                 }
               }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
               console.error("[CFP] Form Submission Error:", error);
-              if (typeof Swal !== 'undefined') {
+              if (typeof Swal !== "undefined") {
                 Swal.fire({
-                  title: 'CONNECTION ERROR',
-                  text: 'An error occurred. Please try again later.',
-                  icon: 'error',
-                  confirmButtonColor: '#000'
+                  title: "CONNECTION ERROR",
+                  text: "An error occurred. Please try again later.",
+                  icon: "error",
+                  confirmButtonColor: "#000",
                 });
               } else {
-                alert('An error occurred. Please try again later.');
+                alert("An error occurred. Please try again later.");
               }
             },
-            complete: function() {
+            complete: function () {
               // Restore button state
-              $submitBtn.prop('disabled', false).text(originalBtnText);
-            }
+              $submitBtn.prop("disabled", false).text(originalBtnText);
+            },
           });
         } else {
           console.log("[CFP] Form Validation Failed");
