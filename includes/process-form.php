@@ -10,7 +10,7 @@ ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 // Configuration
-$admin_email = 'techashir167@gmail.com';
+$admin_email = 'info@canadianfashionproject.com';
 $smtp_user = 'toolgram3@gmail.com';
 $smtp_pass = 'fihwrjdzscwhxixy';
 
@@ -29,8 +29,8 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
 {
     global $smtp_user, $smtp_pass;
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 2; 
-    $mail->Debugoutput = function($str, $level) {
+    $mail->SMTPDebug = 2;
+    $mail->Debugoutput = function ($str, $level) {
         file_put_contents('../data/smtp_debug.log', date('Y-m-d H:i:s') . " [$level] " . $str . PHP_EOL, FILE_APPEND);
     };
 
