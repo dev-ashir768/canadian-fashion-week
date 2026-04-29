@@ -211,13 +211,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <p style='font-family: sans-serif; font-size: 15px; color: #666666; margin: 0 0 35px 0;'>
                                             $sub_msg
                                         </p>
-                                        <a href='https://canadianfashionweek.ca' style='display: inline-block; background-color: #000; color: #ffffff; padding: 16px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;'>Visit Website</a>
+                                        <a href='https://canadianfashionproject.com' style='display: inline-block; background-color: #000; color: #ffffff; padding: 16px 40px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;'>Visit Website</a>
                                         
                                         <div style='margin-top: 50px; padding-top: 30px; border-top: 1px solid #eeeeee;'>
                                             <p style='font-family: sans-serif; font-size: 14px; color: #999999; margin: 0;'>
                                                 Best regards,<br>
                                                 <span style='color: #1a1a1a; font-weight: 600;'>The CFW Team</span><br>
-                                                <a href='https://canadianfashionweek.ca' style='color: #000; text-decoration: none;'>canadianfashionproject.com</a>
+                                                <a href='https://canadianfashionproject.com' style='color: #000; text-decoration: none;'>canadianfashionproject.com</a>
                                             </p>
                                         </div>
                                     </td>
