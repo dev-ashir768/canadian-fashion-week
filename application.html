@@ -558,21 +558,77 @@ $fileInput.attr('accept', 'image/*');
           // Reset Form Data
        $(this)[0].reset();
           $(this).parsley().reset();
-          // Reset File Upload State
-          fileDataTransfer.items.clear();
-          base64Files = [];
-          $('#image-preview-container').empty();
-          $fileText.text('Click to upload (Up to 4 files)');
-          $fileInput.val('');
-          $fileContainer.slideUp();
-       
-          // Show Success SweetAlert
-          Swal.fire({
-           title: 'Success!',            text: 'Application submitted successfully!',
-             icon: 'success',
-             confirmButtonColor: '#000'
-           });
-         });
+            e.preventDefault();
+            
+            if (!$(this).parsley().isValid()) {
+               return;
+            }
+
+            var $submitBtn = $(this).find('button[type="submit"]');
+            var originalBtnText = $submitBtn.text();
+            
+            // Disable button and show loading state
+            $submitBtn.prop('disabled', true).text('SUBMITTING...');
+
+            const formData = new FormData(this);
+            formData.append('form_type', 'Application Form');
+            
+            // Note: file-upload-input files are already in the FormData because they are part of the form
+            // However, the current script accumulates files in fileDataTransfer. 
+            // Let's ensure the input has all accumulated files.
+            // This is already done in the change handler: $fileInput[0].files = fileDataTransfer.files;
+
+            $.ajax({
+              url: 'includes/process-form.php',
+              type: 'POST',
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function(response) {
+                console.log("[CFP] Application Submission Success:", response);
+                
+                if (response.status === 'success') {
+                  // Show Success SweetAlert
+                  Swal.fire({
+                    title: 'Success!',
+                    text: 'Application submitted successfully!',
+                    icon: 'success',
+                    confirmButtonColor: '#000'
+                  });
+
+                  // Reset Form Data
+                  $('#application-form')[0].reset();
+                  $('#application-form').parsley().reset();
+                  // Reset File Upload State
+                  fileDataTransfer.items.clear();
+                  base64Files = [];
+                  $('#image-preview-container').empty();
+                  $fileText.text('Click to upload (Up to 4 files)');
+                  $fileInput.val('');
+                  $fileContainer.slideUp();
+                } else {
+                  Swal.fire({
+                    title: 'Error',
+                    text: response.message || 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonColor: '#000'
+                  });
+                }
+              },
+              error: function(xhr, status, error) {
+                console.error("[CFP] Application Submission Error:", error);
+                Swal.fire({
+                  title: 'Error',
+                  text: 'An error occurred. Please try again later.',
+                  icon: 'error',
+                  confirmButtonColor: '#000'
+                });
+              },
+              complete: function() {
+                $submitBtn.prop('disabled', false).text(originalBtnText);
+              }
+            });
+          });
        });
      </script>
 </body>

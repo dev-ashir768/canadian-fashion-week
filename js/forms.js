@@ -71,21 +71,47 @@
 
         // Manually trigger validation
         if (pInstance.validate()) {
-          var values = {};
-          $form
-            .find("input[name], textarea[name], select[name]")
-            .each(function () {
-              values[this.name] = $(this).val().trim();
-            });
+          var $submitBtn = $form.find('button[type="submit"]');
+          var originalBtnText = $submitBtn.text();
+          
+          // Disable button and show loading state
+          $submitBtn.prop('disabled', true).text('SENDING...');
 
-          console.log("[CFP] Validated Form Submission Success:", values);
+          var formData = new FormData(this);
+          // Add form type based on nearest heading or context if not specified
+          var formTitle = $form.prevAll('h1, h2').first().text() || "Website Form";
+          formData.append('form_type', formTitle.trim());
 
-          // Show the success toast
-          showToast(values.firstName || "Guest");
-
-          // Reset the form and Parsley state
-          $form[0].reset();
-          pInstance.reset();
+          $.ajax({
+            url: 'includes/process-form.php',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+              console.log("[CFP] Form Submission Success:", response);
+              
+              if (response.status === 'success') {
+                // Show the success toast
+                var firstName = $form.find('input[name="firstName"]').val() || "Guest";
+                showToast(firstName);
+                
+                // Reset the form and Parsley state
+                $form[0].reset();
+                pInstance.reset();
+              } else {
+                alert('Something went wrong: ' + response.message);
+              }
+            },
+            error: function(xhr, status, error) {
+              console.error("[CFP] Form Submission Error:", error);
+              alert('An error occurred. Please try again later.');
+            },
+            complete: function() {
+              // Restore button state
+              $submitBtn.prop('disabled', false).text(originalBtnText);
+            }
+          });
         } else {
           console.log("[CFP] Form Validation Failed");
         }
