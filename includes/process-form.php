@@ -226,9 +226,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sendEmail($user_email, $user_subject, $user_email_content, 'Canadian Fashion Week');
     }
 
-    header('Content-Type: application/json');
     echo json_encode(['status' => 'success', 'message' => 'Your message has been sent successfully!']);
+    exit();
 } else {
     header('HTTP/1.1 403 Forbidden');
-    echo "Direct access forbidden";
+    echo json_encode(['status' => 'error', 'message' => 'Direct access forbidden']);
+    exit();
 }
