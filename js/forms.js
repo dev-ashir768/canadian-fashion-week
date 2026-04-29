@@ -92,20 +92,51 @@
               console.log("[CFP] Form Submission Success:", response);
               
               if (response.status === 'success') {
-                // Show the success toast
                 var firstName = $form.find('input[name="firstName"]').val() || "Guest";
-                showToast(firstName);
+                
+                if (typeof Swal !== 'undefined') {
+                  Swal.fire({
+                    title: 'THANK YOU!',
+                    text: response.message,
+                    icon: 'success',
+                    confirmButtonColor: '#000',
+                    customClass: {
+                      popup: 'rounded-2xl',
+                      confirmButton: 'rounded-full px-8 py-3 uppercase tracking-widest text-xs'
+                    }
+                  });
+                } else {
+                  showToast(firstName);
+                }
                 
                 // Reset the form and Parsley state
                 $form[0].reset();
                 pInstance.reset();
               } else {
-                alert('Something went wrong: ' + response.message);
+                if (typeof Swal !== 'undefined') {
+                  Swal.fire({
+                    title: 'ERROR',
+                    text: response.message || 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonColor: '#000'
+                  });
+                } else {
+                  alert('Something went wrong: ' + response.message);
+                }
               }
             },
             error: function(xhr, status, error) {
               console.error("[CFP] Form Submission Error:", error);
-              alert('An error occurred. Please try again later.');
+              if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                  title: 'CONNECTION ERROR',
+                  text: 'An error occurred. Please try again later.',
+                  icon: 'error',
+                  confirmButtonColor: '#000'
+                });
+              } else {
+                alert('An error occurred. Please try again later.');
+              }
             },
             complete: function() {
               // Restore button state
