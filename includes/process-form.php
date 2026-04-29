@@ -29,6 +29,11 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
 {
     global $smtp_user, $smtp_pass;
     $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 2; 
+    $mail->Debugoutput = function($str, $level) {
+        file_put_contents('../data/smtp_debug.log', date('Y-m-d H:i:s') . " [$level] " . $str . PHP_EOL, FILE_APPEND);
+    };
+
     try {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
@@ -45,15 +50,17 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
         // Add attachments if any (standard $_FILES array)
         if (!empty($attachments)) {
             foreach ($attachments as $key => $file) {
-                if (is_array($file['name'])) {
-                    foreach ($file['name'] as $idx => $name) {
-                        if ($file['error'][$idx] === UPLOAD_ERR_OK) {
-                            $mail->addAttachment($file['tmp_name'][$idx], $name);
+                if (isset($file['tmp_name']) && !empty($file['tmp_name'])) {
+                    if (is_array($file['name'])) {
+                        foreach ($file['name'] as $idx => $name) {
+                            if ($file['error'][$idx] === UPLOAD_ERR_OK) {
+                                $mail->addAttachment($file['tmp_name'][$idx], $name);
+                            }
                         }
-                    }
-                } else {
-                    if ($file['error'] === UPLOAD_ERR_OK) {
-                        $mail->addAttachment($file['tmp_name'], $file['name']);
+                    } else {
+                        if ($file['error'] === UPLOAD_ERR_OK) {
+                            $mail->addAttachment($file['tmp_name'], $file['name']);
+                        }
                     }
                 }
             }
@@ -67,6 +74,7 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
         $mail->send();
         return true;
     } catch (Exception $e) {
+        file_put_contents('../data/smtp_error.log', date('Y-m-d H:i:s') . " Error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
         throw new Exception("Mailer Error: {$mail->ErrorInfo}");
     }
 }
