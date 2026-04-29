@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <p style='font-family: sans-serif; font-size: 14px; color: #999999; margin: 0;'>
                                                 Best regards,<br>
                                                 <span style='color: #1a1a1a; font-weight: 600;'>The CFW Team</span><br>
-                                                <a href='https://canadianfashionweek.ca' style='color: #000; text-decoration: none;'>www.canadianfashionweek.ca</a>
+                                                <a href='https://canadianfashionweek.ca' style='color: #000; text-decoration: none;'>canadianfashionproject.com</a>
                                             </p>
                                         </div>
                                     </td>
