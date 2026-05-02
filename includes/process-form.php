@@ -10,7 +10,8 @@ ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 // Configuration
-$admin_email = 'info@canadianfashionw.com';
+// $admin_email = 'info@canadianfashionw.com';
+$admin_email = 'toolgram3@gmail.com';
 $smtp_user = 'toolgram3@gmail.com';
 $smtp_pass = 'fihwrjdzscwhxixy';
 

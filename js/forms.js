@@ -28,12 +28,27 @@ console.log("[CFP] Forms JS External File Loaded");
       }
 
       // Sync signature if it's a petition form
-      if (typeof updateSignatureInput === 'function') {
-          updateSignatureInput();
+      if (typeof window.updateSignatureInput === 'function') {
+          console.log("[CFP] Forcing signature sync...");
+          window.updateSignatureInput();
       }
 
       try {
         var formData = new FormData(this);
+        
+        // Force injection of signature data if it's a petition and pad exists
+        if (typeof window.signaturePad !== 'undefined' && !window.signaturePad.isEmpty()) {
+            console.log("[CFP] Manually injecting signature into FormData");
+            formData.set('digitalSignature', window.signaturePad.toDataURL());
+        }
+        
+        // Log if digitalSignature is present and its length
+        if (formData.has('digitalSignature')) {
+            var sigVal = formData.get('digitalSignature');
+            console.log("[CFP] digitalSignature field found, length:", sigVal ? sigVal.length : 0);
+        } else {
+            console.warn("[CFP] digitalSignature field NOT FOUND in FormData");
+        }
         var formTitle = $form.attr("data-form-name") || 
                         $form.prevAll("h1, h2").first().text() || 
                         $form.parent().prevAll("h1, h2").first().text() || 

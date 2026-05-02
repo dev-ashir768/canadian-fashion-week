@@ -946,35 +946,35 @@
 
       // Signature Pad
       const canvas = document.getElementById("signature-canvas");
-      const signaturePad = new SignaturePad(canvas, {
+      window.signaturePad = new SignaturePad(canvas, {
         backgroundColor: "rgba(0, 0, 0, 0)",
         penColor: "rgb(185, 28, 28)",
       });
 
-      window.updateSignatureInput = function() {
+      window.updateSignatureInput = function () {
         const input = document.getElementById("signature-input");
-        if (signaturePad.isEmpty()) {
+        if (window.signaturePad.isEmpty()) {
           input.value = "";
           console.log("[CFP] Signature is empty");
         } else {
-          input.value = signaturePad.toDataURL();
+          input.value = window.signaturePad.toDataURL();
           console.log("[CFP] Signature captured, length:", input.value.length);
         }
         // Trigger parsley validation
         if (window.jQuery && $(input).parsley) {
           $(input).parsley().validate();
         }
-      }
+      };
 
-      signaturePad.onEnd = window.updateSignatureInput;
+      window.signaturePad.onEnd = window.updateSignatureInput;
 
       function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
         canvas.width = canvas.offsetWidth * ratio;
         canvas.height = canvas.offsetHeight * ratio;
         canvas.getContext("2d").scale(ratio, ratio);
-        signaturePad.clear();
-        updateSignatureInput();
+        window.signaturePad.clear();
+        window.updateSignatureInput();
       }
 
       window.addEventListener("resize", resizeCanvas);
@@ -983,8 +983,8 @@
       document
         .getElementById("clear-signature")
         .addEventListener("click", () => {
-          signaturePad.clear();
-          updateSignatureInput();
+          window.signaturePad.clear();
+          window.updateSignatureInput();
         });
     </script>
   </body>
