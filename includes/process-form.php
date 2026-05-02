@@ -10,8 +10,7 @@ ini_set('display_errors', 0);
 header('Content-Type: application/json');
 
 // Configuration
-// $admin_email = 'info@canadianfashionw.com';
-$admin_email = 'toolgram3@gmail.com';
+$admin_email = 'info@canadianfashionw.com';
 $smtp_user = 'toolgram3@gmail.com';
 $smtp_pass = 'fihwrjdzscwhxixy';
 
@@ -97,9 +96,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST;
     unset($data['form_type']); // Remove helper field
 
-    // Explicitly handle checkboxes for Petition form
+    // Explicitly handle checkboxes and special admin email for Petition form
     if ($form_type === 'Petition') {
         $data['showPublicly'] = isset($_POST['showPublicly']) ? 'Yes' : 'No';
+        $admin_email = 'petitions@canadianfashionw.com';
     }
 
     // Determine the user's email for the greeting
