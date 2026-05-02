@@ -223,6 +223,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user_subject = "Thank you for signing the Petition!";
                 $thank_you_msg = "Thank you for adding your voice to the <strong>Canadian Fashion Project Petition</strong>.";
                 $sub_msg = "By standing with us, you are helping to create a safer, fairer, and more transparent fashion industry for models across Canada and beyond.<br><br>Please share this petition with your network to help us reach our goal!";
+            } elseif (stripos($form_type, 'Opt-Out') !== false) {
+                $user_subject = "Privacy Request Received - Canadian Fashion Project";
+                $thank_you_msg = "We have received your <strong>Opt-Out Request</strong> regarding your personal information.";
+                $sub_msg = "Our legal team will process your request within 15 business days in accordance with applicable privacy laws. You will receive a follow-up confirmation once the process is complete.";
             } else {
                 $thank_you_msg = "Thank you for reaching out to <strong>Canadian Fashion Project</strong>. We have received your $form_type and our team will review it shortly.";
                 $sub_msg = "We appreciate your interest and will get back to you as soon as possible.";
