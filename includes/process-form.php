@@ -1,6 +1,6 @@
 <?php
 /**
- * Canadian Fashion Week - Form Processing Script
+ * Canadian Fashion Project - Form Processing Script
  * Handles Email Notifications via SMTP using PHPMailer
  */
 
@@ -25,7 +25,7 @@ require 'PHPMailer/SMTP.php';
 /**
  * Helper function to send email via SMTP
  */
-function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week', $attachments = [])
+function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Project', $attachments = [])
 {
     global $smtp_user, $smtp_pass;
     $mail = new PHPMailer(true);
@@ -45,7 +45,7 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Week'
 
         $mail->setFrom($smtp_user, $from_name);
         $mail->addAddress($to);
-        $mail->addReplyTo($smtp_user, 'Canadian Fashion Week');
+        $mail->addReplyTo($smtp_user, 'Canadian Fashion Project');
 
         // Add attachments if any (standard $_FILES array)
         if (!empty($attachments)) {
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <table width='600' border='0' cellspacing='0' cellpadding='0' style='background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);'>
                             <tr>
                                 <td style='background-color: #fff; padding: 30px; text-align: center;'>
-                                    <img src='$logo_url' alt='Canadian Fashion Week' style='height: 45px; width: auto;'>
+                                    <img src='$logo_url' alt='Canadian Fashion Project' style='height: 45px; width: auto;'>
                                 </td>
                             </tr>
                             <tr>
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $is_newsletter = (stripos($form_type, 'know') !== false || stripos($form_type, 'newsletter') !== false);
             $is_guestlist = (stripos($form_type, 'guestlist') !== false);
 
-            $user_subject = $is_newsletter ? "Welcome to Canadian Fashion Week!" : ($is_guestlist ? "Guestlist Request Received!" : "Thank you for contacting Canadian Fashion Week!");
+            $user_subject = $is_newsletter ? "Welcome to Canadian Fashion Project!" : ($is_guestlist ? "Guestlist Request Received!" : "Thank you for contacting Canadian Fashion Project!");
 
             if ($is_newsletter) {
                 $thank_you_msg = "Thank you for joining our exclusive community! You're now subscribed to <strong>Stay In The Know</strong>.";
@@ -186,8 +186,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } elseif ($is_guestlist) {
                 $thank_you_msg = "We've successfully received your request for the <strong>Guestlist</strong>.";
                 $sub_msg = "Our team will review your application and if approved, you will receive a formal invitation with further details.";
+                
+                // Add comments to the user confirmation if provided
+                if (!empty($_POST['comments'])) {
+                    $comments = htmlspecialchars($_POST['comments']);
+                    $sub_msg .= "<br><br><strong>Your Message:</strong><br><i style='color: #666;'>\"$comments\"</i>";
+                }
             } else {
-                $thank_you_msg = "Thank you for reaching out to <strong>Canadian Fashion Week</strong>. We have received your $form_type and our team will review it shortly.";
+                $thank_you_msg = "Thank you for reaching out to <strong>Canadian Fashion Project</strong>. We have received your $form_type and our team will review it shortly.";
                 $sub_msg = "We appreciate your interest and will get back to you as soon as possible.";
             }
 
@@ -199,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <table width='600' border='0' cellspacing='0' cellpadding='0' style='background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);'>
                                 <tr>
                                     <td style='background-color: #fff; padding: 40px; text-align: center;'>
-                                        <img src='$logo_url' alt='Canadian Fashion Week' style='height: 50px; width: auto;'>
+                                        <img src='$logo_url' alt='Canadian Fashion Project' style='height: 50px; width: auto;'>
                                     </td>
                                 </tr>
                                 <tr>
@@ -224,14 +230,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </tr>
                             </table>
                             <p style='font-family: sans-serif; font-size: 11px; color: #a0aec0; text-align: center; margin-top: 20px;'>
-                                © 2026 Canadian Fashion Week. All rights reserved.
+                                © 2026 Canadian Fashion Project. All rights reserved.
                             </p>
                         </td>
                     </tr>
                 </table>
             </body>";
 
-            sendEmail($user_email, $user_subject, $user_email_content, 'Canadian Fashion Week');
+            sendEmail($user_email, $user_subject, $user_email_content, 'Canadian Fashion Project');
         }
 
         echo json_encode(['status' => 'success', 'message' => 'Your message has been sent successfully!']);

@@ -106,8 +106,13 @@
         <a
           href="about.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >About</a>
-        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Application</a>
+          >About</a
+        >
+        <a
+          href="application.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Application</a
+        >
       </div>
     </nav>
 
@@ -188,7 +193,8 @@
           >
             Request Ticket Updates
           </p>
-          <form method="POST"
+          <form
+            method="POST"
             data-cfp-form
             data-parsley-validate
             novalidate
@@ -243,6 +249,17 @@
               </select>
             </div>
 
+            <div class="relative group">
+              <textarea
+                name="comments"
+                required
+                data-parsley-required-message="Please provide a brief message or comment."
+                placeholder="COMMENTS / MESSAGE"
+                rows="3"
+                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase resize-none"
+              ></textarea>
+            </div>
+
             <button
               type="submit"
               class="bg-black text-white px-16 py-5 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-black/80 transition-all uppercase cursor-pointer"
@@ -267,7 +284,8 @@
           >
             Stay In The Know
           </h2>
-          <form method="POST"
+          <form
+            method="POST"
             data-cfp-form
             data-parsley-validate
             novalidate
@@ -319,10 +337,15 @@
                 <a
                   href="about.html"
                   class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
-                  >About</a>
+                  >About</a
+                >
               </li>
               <li>
-                <a href="application.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Application</a>
+                <a
+                  href="application.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Application</a
+                >
               </li>
               <li>
                 <a
