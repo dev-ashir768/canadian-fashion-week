@@ -101,6 +101,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $first_name = explode(' ', $first_name)[0];
     }
 
+    /**
+     * Helper to compress base64 images (like signatures)
+     */
+    function compressBase64Image($base64_string, $max_width = 500, $quality = 50)
+    {
+        if (!extension_loaded('gd') || empty($base64_string) || strpos($base64_string, 'data:image/') !== 0) {
+            return $base64_string;
+        }
+
+        try {
+            $parts = explode(',', $base64_string);
+            $data = base64_decode($parts[1]);
+            $img = imagecreatefromstring($data);
+            if (!$img) return $base64_string;
+
+            $width = imagesx($img);
+            $height = imagesy($img);
+
+            // Resize if too wide
+            if ($width > $max_width) {
+                $new_height = ($height / $width) * $max_width;
+                $tmp_img = imagecreatetruecolor($max_width, $new_height);
+                
+                // Set white background (signatures are usually black on white/transparent)
+                $white = imagecolorallocate($tmp_img, 255, 255, 255);
+                imagefill($tmp_img, 0, 0, $white);
+                
+                imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $max_width, $new_height, $width, $height);
+                $img = $tmp_img;
+            }
+
+            ob_start();
+            imagejpeg($img, null, $quality);
+            $compressed_data = ob_get_clean();
+            imagedestroy($img);
+
+            return 'data:image/jpeg;base64,' . base64_encode($compressed_data);
+        } catch (\Exception $e) {
+            return $base64_string;
+        }
+    }
+
+    // Apply compression to any base64 image fields
+    foreach ($data as $key => &$val) {
+        if (is_string($val) && strpos($val, 'data:image/') === 0) {
+            $val = compressBase64Image($val);
+        }
+    }
+    unset($val); // Break reference
+
     try {
         // 1. Save to CSV
         $dataDir = dirname(__DIR__) . '/data';
