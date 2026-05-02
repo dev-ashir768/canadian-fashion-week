@@ -107,8 +107,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Sanitize form type for filename
         $safe_form_name = preg_replace('/[^a-z0-9]/', '_', strtolower($form_type));
-        if (empty($safe_form_name)) $safe_form_name = "submission";
-        
+        if (empty($safe_form_name))
+            $safe_form_name = "submission";
+
         $csv_file = "../data/" . $safe_form_name . ".csv";
         $file_handle = fopen($csv_file, 'a');
 
@@ -127,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (is_array($value)) {
                     $value = implode('; ', $value);
                 }
-                
+
                 // If value is a base64 image (signature), don't store the whole thing in CSV
                 if (strpos($value, 'data:image/') === 0) {
                     $value = "[Digital Signature Provided]";
@@ -146,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (is_array($value)) {
                 $value = implode(', ', $value);
             }
-            
+
             // Check if value is a base64 image (like digital signature)
             $display_value = htmlspecialchars($value);
             if (strpos($value, 'data:image/') === 0) {
@@ -212,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } elseif ($is_guestlist) {
                 $thank_you_msg = "We've successfully received your request for the <strong>Guestlist</strong>.";
                 $sub_msg = "Our team will review your application and if approved, you will receive a formal invitation with further details.";
-                
+
                 // Add comments to the user confirmation if provided
                 if (!empty($_POST['comments'])) {
                     $comments = htmlspecialchars($_POST['comments']);
