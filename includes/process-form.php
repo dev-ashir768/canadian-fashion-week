@@ -31,7 +31,8 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Proje
     $mail = new PHPMailer(true);
     $mail->SMTPDebug = 2;
     $mail->Debugoutput = function ($str, $level) {
-        file_put_contents('../data/smtp_debug.log', date('Y-m-d H:i:s') . " [$level] " . $str . PHP_EOL, FILE_APPEND);
+        $logPath = dirname(__DIR__) . '/data/smtp_debug.log';
+        file_put_contents($logPath, date('Y-m-d H:i:s') . " [$level] " . $str . PHP_EOL, FILE_APPEND);
     };
 
     try {
@@ -74,7 +75,8 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Proje
         $mail->send();
         return true;
     } catch (Exception $e) {
-        file_put_contents('../data/smtp_error.log', date('Y-m-d H:i:s') . " Error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
+        $errorLogPath = dirname(__DIR__) . '/data/smtp_error.log';
+        file_put_contents($errorLogPath, date('Y-m-d H:i:s') . " Error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
         throw new Exception("Mailer Error: {$mail->ErrorInfo}");
     }
 }
@@ -101,8 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // 1. Save to CSV
-        if (!file_exists('../data')) {
-            mkdir('../data', 0755, true);
+        $dataDir = dirname(__DIR__) . '/data';
+        if (!file_exists($dataDir)) {
+            mkdir($dataDir, 0755, true);
         }
 
         // Sanitize form type for filename
@@ -110,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($safe_form_name))
             $safe_form_name = "submission";
 
-        $csv_file = "../data/" . $safe_form_name . ".csv";
+        $csv_file = $dataDir . "/submissions_" . $safe_form_name . ".csv";
         $file_handle = fopen($csv_file, 'a');
 
         if ($file_handle) {
