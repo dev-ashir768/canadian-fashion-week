@@ -19,18 +19,18 @@ console.log("[CFP] Forms JS External File Loaded");
       // Disable button and show loading state
       $submitBtn.prop("disabled", true).text("SENDING...");
 
+      // Sync signature if it's a petition form - DO THIS BEFORE VALIDATION
+      if (typeof window.updateSignatureInput === 'function') {
+          console.log("[CFP] Forcing signature sync before validation...");
+          window.updateSignatureInput();
+      }
+
       // Pre-submit validation
       if ($form.parsley) {
           if (!$form.parsley().validate()) {
               $submitBtn.prop("disabled", false).text(originalBtnText);
               return false;
           }
-      }
-
-      // Sync signature if it's a petition form
-      if (typeof window.updateSignatureInput === 'function') {
-          console.log("[CFP] Forcing signature sync...");
-          window.updateSignatureInput();
       }
 
       try {
@@ -56,6 +56,15 @@ console.log("[CFP] Forms JS External File Loaded");
                         "Website Form";
         
         formData.append("form_type", formTitle.trim());
+
+        // Extra safety check for Petition signature
+        if (formTitle.trim() === "Petition") {
+            var sig = formData.get('digitalSignature');
+            if (!sig || sig.length < 100) {
+                console.warn("[CFP] Signature check failed in JS, even after validation");
+                throw new Error("Digital signature is required. Please sign the pad again.");
+            }
+        }
 
         console.log("[CFP] Sending AJAX to includes/process-form.php");
 

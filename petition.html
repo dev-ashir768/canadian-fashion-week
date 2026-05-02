@@ -354,6 +354,7 @@
                   data-cfp-form
                   data-form-name="Petition"
                   data-parsley-validate
+                  data-parsley-excluded="input[type=button], input[type=submit], input[type=reset]"
                   novalidate
                   class="space-y-6"
                 >
@@ -970,15 +971,34 @@
 
       function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        
+        // Save the signature data before resizing
+        const signatureData = window.signaturePad.toData();
+        
         canvas.width = canvas.offsetWidth * ratio;
         canvas.height = canvas.offsetHeight * ratio;
         canvas.getContext("2d").scale(ratio, ratio);
+        
         window.signaturePad.clear();
+        
+        // Restore signature if it was not empty
+        if (signatureData.length > 0) {
+          window.signaturePad.fromData(signatureData);
+        }
+        
         window.updateSignatureInput();
       }
 
       window.addEventListener("resize", resizeCanvas);
       resizeCanvas();
+
+      // Clear signature pad when form is reset
+      document.getElementById("petition-main-form").addEventListener("reset", () => {
+        setTimeout(() => {
+          window.signaturePad.clear();
+          window.updateSignatureInput();
+        }, 10);
+      });
 
       document
         .getElementById("clear-signature")
