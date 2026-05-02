@@ -97,24 +97,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             mkdir('../data', 0755, true);
         }
 
-        $csv_file = "../data/submissions_" . preg_replace('/[^a-zA-Z0-9_]/', '', strtolower($form_type)) . ".csv";
+        // Sanitize form type for filename
+        $safe_form_name = preg_replace('/[^a-z0-9]/', '_', strtolower($form_type));
+        if (empty($safe_form_name)) $safe_form_name = "submission";
+        
+        $csv_file = "../data/" . $safe_form_name . ".csv";
         $file_handle = fopen($csv_file, 'a');
 
         if ($file_handle) {
             // Add headers if file is new
             if (filesize($csv_file) === 0) {
-                $headers = ['Timestamp', 'Form Type'];
+                $headers = ['Timestamp'];
                 foreach ($data as $key => $value) {
                     $headers[] = ucwords(str_replace(['_', '-'], ' ', $key));
                 }
                 fputcsv($file_handle, $headers);
             }
 
-            $row = [$timestamp, $form_type];
+            $row = [$timestamp];
             foreach ($data as $value) {
-                if (is_array($value))
+                if (is_array($value)) {
                     $value = implode('; ', $value);
-                $row[] = str_replace(["\r", "\n", ","], [" ", " ", ";"], $value);
+                }
+                
+                // If value is a base64 image (signature), don't store the whole thing in CSV
+                if (strpos($value, 'data:image/') === 0) {
+                    $value = "[Digital Signature Provided]";
+                }
+
+                $row[] = $value;
             }
             fputcsv($file_handle, $row);
             fclose($file_handle);
@@ -127,9 +138,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (is_array($value)) {
                 $value = implode(', ', $value);
             }
+            
+            // Check if value is a base64 image (like digital signature)
+            $display_value = htmlspecialchars($value);
+            if (strpos($value, 'data:image/') === 0) {
+                $display_value = "<img src='$value' style='max-width: 200px; height: auto; border: 1px solid #ddd; background: #fff;'>";
+            }
+
             $details_html .= "<tr>
                 <td style='padding: 12px 0; border-bottom: 1px solid #edf2f7; font-family: sans-serif; font-size: 13px; font-weight: 600; color: #4a5568; width: 40%;'>$label</td>
-                <td style='padding: 12px 0; border-bottom: 1px solid #edf2f7; font-family: sans-serif; font-size: 13px; color: #1a202c;'>$value</td>
+                <td style='padding: 12px 0; border-bottom: 1px solid #edf2f7; font-family: sans-serif; font-size: 13px; color: #1a202c;'>$display_value</td>
             </tr>";
         }
 
@@ -192,6 +210,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $comments = htmlspecialchars($_POST['comments']);
                     $sub_msg .= "<br><br><strong>Your Message:</strong><br><i style='color: #666;'>\"$comments\"</i>";
                 }
+            } elseif (stripos($form_type, 'Petition') !== false) {
+                $first_name = $_POST['fullName'] ?? 'Supporter';
+                $user_subject = "Thank you for signing the Petition!";
+                $thank_you_msg = "Thank you for adding your voice to the <strong>Canadian Fashion Project Petition</strong>.";
+                $sub_msg = "By standing with us, you are helping to create a safer, fairer, and more transparent fashion industry for models across Canada and beyond.<br><br>Please share this petition with your network to help us reach our goal!";
             } else {
                 $thank_you_msg = "Thank you for reaching out to <strong>Canadian Fashion Project</strong>. We have received your $form_type and our team will review it shortly.";
                 $sub_msg = "We appreciate your interest and will get back to you as soon as possible.";

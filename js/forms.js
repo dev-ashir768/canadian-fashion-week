@@ -21,7 +21,8 @@ console.log("[CFP] Forms JS External File Loaded");
 
       try {
         var formData = new FormData(this);
-        var formTitle = $form.prevAll("h1, h2").first().text() || 
+        var formTitle = $form.attr("data-form-name") || 
+                        $form.prevAll("h1, h2").first().text() || 
                         $form.parent().prevAll("h1, h2").first().text() || 
                         $form.closest('main, section').find('h1, h2').first().text() ||
                         "Website Form";

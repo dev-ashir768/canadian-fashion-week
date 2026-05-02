@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign the Petition | Canadian Fashion Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="/images/white-logo.jpeg" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-sans: "Poppins", sans-serif;
+        --color-cfp-red: #b91c1c;
+      }
+
+      .text-glow {
+        text-shadow: 0 0 20px rgba(185, 28, 28, 0.3);
+      }
+
+      .petition-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-input {
+        @apply w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-cfp-red focus:ring-1 focus:ring-cfp-red transition-all;
+      }
+
+      #signature-pad {
+        @apply w-full h-40 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 relative cursor-crosshair;
+      }
+
+      #signature-pad canvas {
+        @apply absolute inset-0 w-full h-full;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans bg-white text-black">
+    <!-- Header Layer -->
+    <header
+      id="main-header"
+      class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 md:px-12 lg:px-16 transition-all duration-500 transition-colors"
+    >
+      <div class="logo">
+        <a href="/" class="block">
+          <img
+            id="header-logo"
+            src="images/white-logo.png"
+            alt="Canadian Fashion Project"
+            class="h-8 md:h-10 lg:h-16 transition-all duration-500"
+          />
+        </a>
+      </div>
+      <button
+        id="nav-toggle"
+        class="group flex items-center gap-4 cursor-pointer z-[100]"
+      >
+        <div class="flex flex-col gap-1.5 w-6">
+          <span
+            id="line-1"
+            class="h-[1px] w-full bg-black transition-all duration-500"
+          ></span>
+          <span
+            id="line-2"
+            class="h-[1px] w-full bg-black transition-all duration-500"
+          ></span>
+        </div>
+      </button>
+    </header>
+
+    <!-- Side Navigation -->
+    <div
+      id="nav-overlay"
+      class="fixed inset-0 bg-black/60 z-[60] opacity-0 invisible backdrop-blur-sm"
+    ></div>
+    <nav id="side-nav" class="px-12 py-6">
+      <div class="flex justify-end md:mb-12">
+        <button
+          id="nav-close"
+          class="group flex items-center gap-4 cursor-pointer"
+        >
+          <div class="relative w-6 h-6 flex items-center justify-center">
+            <span class="absolute h-[1px] w-full bg-black rotate-45"></span>
+            <span class="absolute h-[1px] w-full bg-black -rotate-45"></span>
+          </div>
+        </button>
+      </div>
+      <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
+        <a
+          href="schedule.html"
+          class="group flex items-center justify-between border-b border-gray-300 pb-4 nav-bounce-hover"
+        >
+          <span class="text-xl font-bold text-black uppercase tracking-tighter"
+            >Schedule</span
+          >
+        </a>
+        <a
+          href="guestlist.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Guestlist</a
+        >
+        <a
+          href="privacy-policy.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Privacy Policy</a
+        >
+        <a
+          href="accessibility.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Accessibility</a
+        >
+        <a
+          href="contact-us.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Contact</a
+        >
+        <a
+          href="about.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >About</a
+        >
+        <a
+          href="application.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Application</a
+        >
+        <a
+          href="petition.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Petition</a
+        >
+      </div>
+    </nav>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const logo = document.getElementById("header-logo");
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+      const sideNav = document.getElementById("side-nav");
+      const navOverlay = document.getElementById("nav-overlay");
+
+      function toggleNav() {
+        sideNav.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        document.body.classList.toggle("overflow-hidden");
+      }
+
+      navToggle.addEventListener("click", toggleNav);
+      navClose.addEventListener("click", toggleNav);
+      navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+        } else {
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+        }
+      };
+    </script>
+
+    <main>
+      <!-- Hero Section -->
+      <section
+        class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white"
+      >
+        <div class="container mx-auto px-6 relative z-10">
+          <div class="flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2 animate-fade-in-up">
+              <h1
+                class="text-5xl md:text-7xl font-black leading-[1.1] tracking-tighter uppercase mb-8"
+              >
+                We are working on <br />
+                <span class="text-cfp-red">Changing the Laws</span>
+              </h1>
+              <p
+                class="text-lg md:text-xl text-gray-600 font-medium uppercase tracking-widest mb-12 max-w-xl"
+              >
+                To protect models from exploitation by big fashion organizations
+                and modeling agencies.
+              </p>
+              <div class="relative inline-block">
+                <div
+                  class="bg-black text-white px-8 py-4 text-sm font-bold tracking-[0.3em] uppercase relative z-10 italic"
+                >
+                  No model should ever <span class="text-cfp-red">pay</span> to
+                  participate.
+                </div>
+                <div
+                  class="absolute -bottom-2 -right-2 w-full h-full border-2 border-cfp-red -z-0"
+                ></div>
+              </div>
+            </div>
+
+            <div class="lg:w-1/2 relative">
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1200"
+                  alt="Model Justice"
+                  class="w-full h-[600px] object-cover grayscale brightness-75"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+                ></div>
+
+                <!-- <div
+                  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:left-auto lg:right-10 lg:translate-x-0 w-64 bg-black/90 backdrop-blur-md p-8 rounded-xl border border-white/10 text-center animate-pulse"
+                >
+                  <div class="flex justify-center mb-4 text-cfp-red">
+                    <svg
+                      class="w-10 h-10"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="text-4xl font-black text-white mb-2">23,481</div>
+                  <div
+                    class="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase leading-tight"
+                  >
+                    People have signed the petition
+                  </div>
+                  <a
+                    href="#petition-form"
+                    class="mt-6 block bg-cfp-red text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-cfp-red/80 transition-all rounded-md"
+                    >Sign the Petition →</a
+                  >
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why It Matters Section -->
+      <section
+        id="why-matters"
+        class="py-24 bg-black text-white overflow-hidden"
+      >
+        <div class="container mx-auto px-6">
+          <div class="flex flex-col lg:flex-row gap-20">
+            <div class="lg:w-1/2">
+              <h2
+                class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-12"
+              >
+                Why <span class="text-cfp-red italic mr-3">This</span> Matters
+              </h2>
+              <div class="space-y-12">
+                <p class="text-gray-400 text-lg leading-relaxed max-w-xl">
+                  Models around the world are facing unfair practices, hidden
+                  fees, and a lack of protection. It's time for change. It's
+                  time for fairness, transparency, and respect.
+                </p>
+
+                <div class="space-y-8">
+                  <div class="flex gap-6 items-start">
+                    <div
+                      class="w-12 h-12 rounded-full border border-cfp-red flex items-center justify-center flex-shrink-0 text-cfp-red"
+                    >
+                      <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p
+                        class="text-sm font-bold uppercase tracking-widest text-gray-200 mb-2"
+                      >
+                        Upfront Fees
+                      </p>
+                      <p class="text-gray-400 text-sm">
+                        Models are often forced to pay high upfront fees for
+                        representation.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-6 items-start">
+                    <div
+                      class="w-12 h-12 rounded-full border border-cfp-red flex items-center justify-center flex-shrink-0 text-cfp-red"
+                    >
+                      <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p
+                        class="text-sm font-bold uppercase tracking-widest text-gray-200 mb-2"
+                      >
+                        Contractual Gaps
+                      </p>
+                      <p class="text-gray-400 text-sm">
+                        Lack of transparency in contracts leaves models
+                        vulnerable to abuse.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-6 items-start">
+                    <div
+                      class="w-12 h-12 rounded-full border border-cfp-red flex items-center justify-center flex-shrink-0 text-cfp-red"
+                    >
+                      <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <p
+                        class="text-sm font-bold uppercase tracking-widest text-gray-200 mb-2"
+                      >
+                        No Legal Shield
+                      </p>
+                      <p class="text-gray-400 text-sm">
+                        No protection against exploitation, verbal abuse, or
+                        harassment.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:w-1/2">
+              <div
+                id="petition-form"
+                class="petition-card p-10 md:p-12 text-black"
+              >
+                <h3 class="text-3xl font-black uppercase tracking-tighter mb-2">
+                  Add <span class="text-cfp-red">Your</span> Voice
+                </h3>
+                <p
+                  class="text-gray-500 text-sm uppercase tracking-widest mb-10"
+                >
+                  Sign the petition and be a part of the change.
+                </p>
+
+                <form
+                  id="petition-main-form"
+                  method="POST"
+                  data-cfp-form
+                  data-form-name="Petition"
+                  data-parsley-validate
+                  novalidate
+                  class="space-y-6"
+                >
+                  <div class="relative">
+                    <span
+                      class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <input
+                      type="text"
+                      name="fullName"
+                      required
+                      placeholder="FULL NAME"
+                      class="form-input pl-12 uppercase text-xs tracking-widest"
+                    />
+                  </div>
+
+                  <div class="relative">
+                    <span
+                      class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="EMAIL ADDRESS"
+                      class="form-input pl-12 uppercase text-xs tracking-widest"
+                    />
+                  </div>
+
+                  <div class="relative">
+                    <span
+                      class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                    </span>
+                    <select
+                      name="country"
+                      required
+                      class="form-input pl-12 appearance-none uppercase text-xs tracking-widest text-gray-500"
+                    >
+                      <option value="" disabled selected>SELECT COUNTRY</option>
+                      <!-- Countries will be populated by JS -->
+                    </select>
+                  </div>
+
+                  <!-- Digital Signature -->
+                  <div class="space-y-2">
+                    <label
+                      class="text-[10px] font-bold text-gray-500 uppercase tracking-widest"
+                      >Sign Here *</label
+                    >
+                    <div id="signature-pad" class="signature-pad">
+                      <canvas id="signature-canvas"></canvas>
+                    </div>
+                    <div class="flex justify-between items-center">
+                      <button
+                        type="button"
+                        id="clear-signature"
+                        class="text-[9px] font-bold text-gray-400 uppercase tracking-widest hover:text-cfp-red transition-colors"
+                      >
+                        Clear Signature
+                      </button>
+                      <p class="text-[9px] text-gray-400 italic">
+                        Sign using your mouse or touch screen
+                      </p>
+                    </div>
+                    <input
+                      type="hidden"
+                      name="digitalSignature"
+                      id="signature-input"
+                      required
+                      data-parsley-errors-container="#signature-error"
+                    />
+                    <div id="signature-error"></div>
+                  </div>
+
+                  <div class="flex items-center gap-3 py-2">
+                    <input
+                      type="checkbox"
+                      name="showPublicly"
+                      id="showPublicly"
+                      class="w-5 h-5 accent-cfp-red cursor-pointer"
+                    />
+                    <label
+                      for="showPublicly"
+                      class="text-[10px] font-bold text-gray-500 uppercase tracking-widest cursor-pointer"
+                      >Show my name publicly on the petition</label
+                    >
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="w-full bg-cfp-red text-white py-5 rounded-lg font-black uppercase tracking-[0.2em] hover:bg-cfp-red/90 transition-all shadow-xl shadow-cfp-red/20"
+                  >
+                    Add My Signature
+                  </button>
+
+                  <p
+                    class="text-center text-[9px] text-gray-400 uppercase tracking-widest mt-4"
+                  >
+                    <svg
+                      class="w-3 h-3 inline-block mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      ></path>
+                    </svg>
+                    Your information is secure and will not be shared.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="stories" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+          <h2
+            class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-4"
+          >
+            Thousands are standing <span class="text-cfp-red">Together</span>
+          </h2>
+          <p
+            class="text-gray-500 text-sm uppercase tracking-[0.3em] font-bold mb-20"
+          >
+            Real People. Real Change.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div
+              class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-left relative"
+            >
+              <div class="text-cfp-red mb-6">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V21H14.017ZM5.017 21L5.017 18C5.017 16.8954 5.9124 16 7.017 16H10.017V21H5.017ZM10.017 11C10.017 11.5523 9.56928 12 9.017 12H1.017V5C1.017 4.44772 1.46472 4 2.017 4H8.017C8.56928 4 9.017 4.44772 10.017 5V11ZM19.017 11C19.017 11.5523 18.5693 12 18.017 12H10.017V5C10.017 4.44772 10.4647 4 11.017 4H17.017C17.5693 4 18.017 4.44772 19.017 5V11Z"
+                  ></path>
+                </svg>
+              </div>
+              <p class="text-gray-600 italic mb-8 leading-relaxed">
+                "This is about respect, dignity and creating a safer future for
+                all models."
+              </p>
+              <div class="flex items-center gap-4">
+                <img
+                  src="https://i.pravatar.cc/150?u=sarah"
+                  alt="Sarah J."
+                  class="w-12 h-12 rounded-full grayscale"
+                />
+                <div>
+                  <p class="font-bold text-sm uppercase">Sarah J.</p>
+                  <p
+                    class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"
+                  >
+                    Model
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div
+              class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-left relative"
+            >
+              <div class="text-cfp-red mb-6">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V21H14.017ZM5.017 21L5.017 18C5.017 16.8954 5.9124 16 7.017 16H10.017V21H5.017ZM10.017 11C10.017 11.5523 9.56928 12 9.017 12H1.017V5C1.017 4.44772 1.46472 4 2.017 4H8.017C8.56928 4 9.017 4.44772 10.017 5V11ZM19.017 11C19.017 11.5523 18.5693 12 18.017 12H10.017V5C10.017 4.44772 10.4647 4 11.017 4H17.017C17.5693 4 18.017 4.44772 19.017 5V11Z"
+                  ></path>
+                </svg>
+              </div>
+              <p class="text-gray-600 italic mb-8 leading-relaxed">
+                "No one should have to pay to chase their dreams. It's time for
+                change."
+              </p>
+              <div class="flex items-center gap-4">
+                <img
+                  src="https://i.pravatar.cc/150?u=daniel"
+                  alt="Daniel K."
+                  class="w-12 h-12 rounded-full grayscale"
+                />
+                <div>
+                  <p class="font-bold text-sm uppercase">Daniel K.</p>
+                  <p
+                    class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"
+                  >
+                    Model
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+              class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-left relative"
+            >
+              <div class="text-cfp-red mb-6">
+                <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V21H14.017ZM5.017 21L5.017 18C5.017 16.8954 5.9124 16 7.017 16H10.017V21H5.017ZM10.017 11C10.017 11.5523 9.56928 12 9.017 12H1.017V5C1.017 4.44772 1.46472 4 2.017 4H8.017C8.56928 4 9.017 4.44772 10.017 5V11ZM19.017 11C19.017 11.5523 18.5693 12 18.017 12H10.017V5C10.017 4.44772 10.4647 4 11.017 4H17.017C17.5693 4 18.017 4.44772 19.017 5V11Z"
+                  ></path>
+                </svg>
+              </div>
+              <p class="text-gray-600 italic mb-8 leading-relaxed">
+                "I signed because I believe in a fair and transparent fashion
+                industry."
+              </p>
+              <div class="flex items-center gap-4">
+                <img
+                  src="https://i.pravatar.cc/150?u=maria"
+                  alt="Maria L."
+                  class="w-12 h-12 rounded-full grayscale"
+                />
+                <div>
+                  <p class="font-bold text-sm uppercase">Maria L.</p>
+                  <p
+                    class="text-[10px] text-gray-400 font-bold uppercase tracking-widest"
+                  >
+                    Model
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom CTA -->
+      <section class="py-16 bg-black border-y border-white/10 text-center">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-xl md:text-3xl font-black uppercase tracking-tighter text-white mb-10"
+          >
+            No model should ever <span class="text-cfp-red">pay</span> to
+            participate.
+          </h2>
+          <a
+            href="#petition-form"
+            class="inline-block bg-cfp-red text-white px-12 py-5 rounded-full font-black uppercase tracking-[0.2em] hover:bg-cfp-red/80 transition-all shadow-2xl shadow-cfp-red/40"
+          >
+            Sign the Petition Now →
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer
+      class="bg-black text-white pt-20 pb-12 px-6 md:px-12 lg:px-13 border-t border-white/10"
+    >
+      <div class="container mx-auto flex flex-col lg:flex-row gap-20 lg:gap-32">
+        <!-- Newsletter Section -->
+        <div class="flex-1 max-w-2xl">
+          <h2
+            class="text-3xl md:text-5xl font-light tracking-wider mb-12 uppercase"
+          >
+            Stay In The Know
+          </h2>
+          <form
+            method="POST"
+            data-cfp-form
+            data-parsley-validate
+            novalidate
+            class="space-y-12"
+          >
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  placeholder="FIRST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+              <div class="flex-1 relative">
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  placeholder="LAST NAME"
+                  class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+                />
+              </div>
+            </div>
+            <div class="relative">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="EMAIL ADDRESS"
+                class="w-full bg-transparent border-b border-white/30 py-3 text-[13px] tracking-[0.3em] outline-none focus:border-white transition-colors placeholder:text-white uppercase"
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-white text-black px-14 py-4 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-white/90 transition-all uppercase cursor-pointer"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="flex flex-col md:flex-row gap-16 lg:gap-32">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-16 lg:gap-32">
+            <ul class="space-y-6 text-nowrap">
+              <li>
+                <a
+                  href="about.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="application.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Application</a
+                >
+              </li>
+              <li>
+                <a
+                  href="accessibility.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Accessibility</a
+                >
+              </li>
+              <li>
+                <a
+                  href="privacy-policy.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="do-not-sell.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase leading-loose"
+                  >Do Not Sell My<br />
+                  Personal Info</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div
+        class="container mx-auto mt-15 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-end gap-12"
+      >
+        <div class="max-w-2xl">
+          <p
+            class="text-[9px] md:text-[10px] leading-relaxed text-white tracking-[0.15em]"
+          >
+            By subscribing you consent to receive newsletters, updates, special
+            offers, and other updates from Canadian Fashion Project: The Shows,
+            and their respective partners, licensees, affiliates, and
+            subsidiaries. You may withdraw your consent at any time.
+            <a
+              href="/privacy-policy.html"
+              class="underline underline-offset-4 hover:text-white transition-colors"
+              >Privacy Policy</a
+            >.
+          </p>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-10 items-center">
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/canadianfashionweekoffcial?igsh=anZvanVnNnkxbmFx"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-70 transition-opacity text-white"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    <script src="js/forms.js?v=1.5"></script>
+    <script>
+      // Populate Countries
+      const countries = [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "Andorra",
+        "Angola",
+        "Antigua and Barbuda",
+        "Argentina",
+        "Armenia",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahamas",
+        "Bahrain",
+        "Bangladesh",
+        "Barbados",
+        "Belarus",
+        "Belgium",
+        "Belize",
+        "Benin",
+        "Bhutan",
+        "Bolivia",
+        "Bosnia and Herzegovina",
+        "Botswana",
+        "Brazil",
+        "Brunei",
+        "Bulgaria",
+        "Burkina Faso",
+        "Burundi",
+        "Cabo Verde",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Central African Republic",
+        "Chad",
+        "Chile",
+        "China",
+        "Colombia",
+        "Comoros",
+        "Congo",
+        "Costa Rica",
+        "Croatia",
+        "Cuba",
+        "Cyprus",
+        "Czech Republic",
+        "Denmark",
+        "Djibouti",
+        "Dominica",
+        "Dominican Republic",
+        "Ecuador",
+        "Egypt",
+        "El Salvador",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Estonia",
+        "Eswatini",
+        "Ethiopia",
+        "Fiji",
+        "Finland",
+        "France",
+        "Gabon",
+        "Gambia",
+        "Georgia",
+        "Germany",
+        "Ghana",
+        "Greece",
+        "Grenada",
+        "Guatemala",
+        "Guinea",
+        "Guinea-Bissau",
+        "Guyana",
+        "Haiti",
+        "Holy See",
+        "Honduras",
+        "Hungary",
+        "Iceland",
+        "India",
+        "Indonesia",
+        "Iran",
+        "Iraq",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Jamaica",
+        "Japan",
+        "Jordan",
+        "Kazakhstan",
+        "Kenya",
+        "Kiribati",
+        "Kuwait",
+        "Kyrgyzstan",
+        "Laos",
+        "Latvia",
+        "Lebanon",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Marshall Islands",
+        "Mauritania",
+        "Mauritius",
+        "Mexico",
+        "Micronesia",
+        "Moldova",
+        "Monaco",
+        "Mongolia",
+        "Montenegro",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "Nepal",
+        "Netherlands",
+        "New Zealand",
+        "Nicaragua",
+        "Niger",
+        "Nigeria",
+        "North Korea",
+        "North Macedonia",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palau",
+        "Palestine State",
+        "Panama",
+        "Papua New Guinea",
+        "Paraguay",
+        "Peru",
+        "Philippines",
+        "Poland",
+        "Portugal",
+        "Qatar",
+        "Romania",
+        "Russia",
+        "Rwanda",
+        "Saint Kitts and Nevis",
+        "Saint Lucia",
+        "Saint Vincent and the Grenadines",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Saudi Arabia",
+        "Senegal",
+        "Serbia",
+        "Seychelles",
+        "Sierra Leone",
+        "Singapore",
+        "Slovakia",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Korea",
+        "South Sudan",
+        "Spain",
+        "Sri Lanka",
+        "Sudan",
+        "Suriname",
+        "Sweden",
+        "Switzerland",
+        "Syria",
+        "Tajikistan",
+        "Tanzania",
+        "Thailand",
+        "Timor-Leste",
+        "Togo",
+        "Tonga",
+        "Trinidad and Tobago",
+        "Tunisia",
+        "Turkey",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "Ukraine",
+        "United Arab Emirates",
+        "United Kingdom",
+        "United States of America",
+        "Uruguay",
+        "Uzbekistan",
+        "Vanuatu",
+        "Venezuela",
+        "Vietnam",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe",
+      ];
+      const countrySelect = document.querySelector('select[name="country"]');
+      countries.forEach((country) => {
+        const option = document.createElement("option");
+        option.value = country;
+        option.textContent = country;
+        option.className = "text-black";
+        countrySelect.appendChild(option);
+      });
+
+      // Signature Pad
+      const canvas = document.getElementById("signature-canvas");
+      const signaturePad = new SignaturePad(canvas, {
+        backgroundColor: "rgba(0, 0, 0, 0)",
+        penColor: "rgb(185, 28, 28)",
+      });
+
+      function updateSignatureInput() {
+        if (signaturePad.isEmpty()) {
+          document.getElementById("signature-input").value = "";
+        } else {
+          document.getElementById("signature-input").value =
+            signaturePad.toDataURL();
+        }
+      }
+
+      signaturePad.onEnd = updateSignatureInput;
+
+      function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear();
+        updateSignatureInput();
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      document
+        .getElementById("clear-signature")
+        .addEventListener("click", () => {
+          signaturePad.clear();
+          updateSignatureInput();
+        });
+    </script>
+  </body>
+</html>
