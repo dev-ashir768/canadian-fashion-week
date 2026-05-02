@@ -67,6 +67,13 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Proje
             }
         }
 
+        // Add custom string attachments (e.g., base64 decoded signatures)
+        if (isset($attachments['custom_string_attachments']) && is_array($attachments['custom_string_attachments'])) {
+            foreach ($attachments['custom_string_attachments'] as $filename => $content) {
+                $mail->addStringAttachment($content, $filename);
+            }
+        }
+
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $message;
@@ -251,7 +258,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </body>";
 
         $admin_subject = "CFP | New $form_type from $first_name";
-        sendEmail($admin_email, $admin_subject, $admin_email_content, 'CFP Notification System', $_FILES);
+        
+        // Prepare attachments array
+        $email_attachments = $_FILES;
+        
+        // Handle Digital Signature as an attachment
+        if (!empty($_POST['digitalSignature']) && strpos($_POST['digitalSignature'], 'data:image/') === 0) {
+            $sig_parts = explode(',', $_POST['digitalSignature']);
+            if (isset($sig_parts[1])) {
+                $sig_data = base64_decode($sig_parts[1]);
+                $email_attachments['custom_string_attachments']['signature.png'] = $sig_data;
+            }
+        }
+
+        sendEmail($admin_email, $admin_subject, $admin_email_content, 'CFP Notification System', $email_attachments);
 
         // 2. User Confirmation Email Template
         if (!empty($user_email)) {
