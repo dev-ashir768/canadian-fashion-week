@@ -202,6 +202,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 2. Admin Notification Email Template
         $details_html = "";
+        $signature_to_attach = null;
+
         foreach ($data as $key => $value) {
             $label = ucwords(str_replace(['_', '-'], ' ', $key));
             if (is_array($value)) {
@@ -210,8 +212,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Check if value is a base64 image (like digital signature)
             $display_value = htmlspecialchars($value);
-            if (strpos($value, 'data:image/') === 0) {
-                $display_value = "<img src='$value' style='max-width: 200px; height: auto; border: 1px solid #ddd; background: #fff;'>";
+            if (is_string($value) && strpos($value, 'data:image/') === 0) {
+                $signature_to_attach = $value;
+                $display_value = "<span style='color: #b91c1c; font-weight: bold;'>[Digital Signature - See Attachment]</span>";
             }
 
             $details_html .= "<tr>
@@ -263,8 +266,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email_attachments = $_FILES;
         
         // Handle Digital Signature as an attachment
-        if (!empty($_POST['digitalSignature']) && strpos($_POST['digitalSignature'], 'data:image/') === 0) {
-            $sig_parts = explode(',', $_POST['digitalSignature']);
+        if (!empty($signature_to_attach)) {
+            $sig_parts = explode(',', $signature_to_attach);
             if (isset($sig_parts[1])) {
                 $sig_data = base64_decode($sig_parts[1]);
                 $email_attachments['custom_string_attachments']['signature.png'] = $sig_data;
