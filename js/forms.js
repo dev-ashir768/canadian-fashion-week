@@ -19,6 +19,19 @@ console.log("[CFP] Forms JS External File Loaded");
       // Disable button and show loading state
       $submitBtn.prop("disabled", true).text("SENDING...");
 
+      // Pre-submit validation
+      if ($form.parsley) {
+          if (!$form.parsley().validate()) {
+              $submitBtn.prop("disabled", false).text(originalBtnText);
+              return false;
+          }
+      }
+
+      // Sync signature if it's a petition form
+      if (typeof updateSignatureInput === 'function') {
+          updateSignatureInput();
+      }
+
       try {
         var formData = new FormData(this);
         var formTitle = $form.attr("data-form-name") || 

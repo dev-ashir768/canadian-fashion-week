@@ -951,12 +951,14 @@
         penColor: "rgb(185, 28, 28)",
       });
 
-      function updateSignatureInput() {
+      window.updateSignatureInput = function() {
         const input = document.getElementById("signature-input");
         if (signaturePad.isEmpty()) {
           input.value = "";
+          console.log("[CFP] Signature is empty");
         } else {
           input.value = signaturePad.toDataURL();
+          console.log("[CFP] Signature captured, length:", input.value.length);
         }
         // Trigger parsley validation
         if (window.jQuery && $(input).parsley) {
@@ -964,7 +966,7 @@
         }
       }
 
-      signaturePad.onEnd = updateSignatureInput;
+      signaturePad.onEnd = window.updateSignatureInput;
 
       function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);

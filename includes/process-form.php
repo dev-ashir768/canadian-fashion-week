@@ -121,7 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $parts = explode(',', $base64_string);
             $data = base64_decode($parts[1]);
             $img = imagecreatefromstring($data);
-            if (!$img) return $base64_string;
+            if (!$img)
+                return $base64_string;
 
             $width = imagesx($img);
             $height = imagesy($img);
@@ -130,11 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($width > $max_width) {
                 $new_height = ($height / $width) * $max_width;
                 $tmp_img = imagecreatetruecolor($max_width, $new_height);
-                
+
                 // Set white background (signatures are usually black on white/transparent)
                 $white = imagecolorallocate($tmp_img, 255, 255, 255);
                 imagefill($tmp_img, 0, 0, $white);
-                
+
                 imagecopyresampled($tmp_img, $img, 0, 0, 0, 0, $max_width, $new_height, $width, $height);
                 $img = $tmp_img;
             }
@@ -150,13 +151,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Apply compression to any base64 image fields
+    // Debug Logging
+    $log_file = dirname(__DIR__) . '/data/form_debug.log';
+    $debug_msg = date('Y-m-d H:i:s') . " | Form: $form_type | Fields: " . implode(', ', array_keys($data)) . PHP_EOL;
+    if (!empty($data['digitalSignature'])) {
+        $debug_msg .= "Signature Length: " . strlen($data['digitalSignature']) . PHP_EOL;
+        $debug_msg .= "Signature Prefix: " . substr($data['digitalSignature'], 0, 30) . PHP_EOL;
+    } else {
+        $debug_msg .= "Signature is MISSING or EMPTY in POST data" . PHP_EOL;
+    }
+    file_put_contents($log_file, $debug_msg, FILE_APPEND);
+
+    /* 
+    // Temporarily disabling compression to rule out GD library issues
     foreach ($data as $key => &$val) {
         if (is_string($val) && strpos($val, 'data:image/') === 0) {
             $val = compressBase64Image($val);
         }
     }
-    unset($val); // Break reference
+    unset($val); 
+    */
 
     try {
         // 1. Save to CSV
@@ -261,16 +275,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </body>";
 
         $admin_subject = "CFP | New $form_type from $first_name";
-        
+
         // Prepare attachments array
         $email_attachments = $_FILES;
-        
+
         // Handle Digital Signature as an attachment
         if (!empty($signature_to_attach)) {
             $sig_parts = explode(',', $signature_to_attach);
-            if (isset($sig_parts[1])) {
+            if (count($sig_parts) > 1) {
                 $sig_data = base64_decode($sig_parts[1]);
-                $email_attachments['custom_string_attachments']['signature.png'] = $sig_data;
+                if ($sig_data) {
+                    $email_attachments['custom_string_attachments']['signature.png'] = $sig_data;
+                }
             }
         }
 
