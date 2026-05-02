@@ -419,14 +419,12 @@
                       type="hidden"
                       name="digitalSignature"
                       id="signature-input"
-                      required
-                      data-parsley-error-message="Please provide your signature"
-                      data-parsley-errors-container="#signature-error"
                     />
                     <div
                       id="signature-error"
                       class="text-cfp-red text-[10px] mt-1 font-bold"
-                    ></div>
+                      style="display: none;"
+                    >Please provide your signature</div>
                   </div>
 
                   <div class="flex items-center gap-3 py-2">
@@ -738,7 +736,7 @@
     <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
-    <script src="js/forms.js?v=1.5"></script>
+    <script src="js/forms.js?v=1.6"></script>
     <script>
       // Populate Countries
       const countries = [
@@ -952,7 +950,28 @@
         penColor: "rgb(185, 28, 28)",
       });
 
-      window.updateSignatureInput = function () {
+      // Handle events
+      window.signaturePad.onBegin = function () {
+        // Clear error as soon as they start signing
+        const input = document.getElementById("signature-input");
+        const errorContainer = document.getElementById("signature-error");
+
+        if (errorContainer) {
+          errorContainer.innerHTML = "";
+          errorContainer.style.display = "none"; // Hide it too
+        }
+
+        if (window.jQuery && $(input).parsley) {
+          $(input).parsley().reset();
+          $(input).parsley().removeError("required");
+        }
+      };
+
+      window.signaturePad.onEnd = function () {
+        window.updateSignatureInput(true);
+      };
+
+      window.updateSignatureInput = function (shouldValidate = false) {
         const input = document.getElementById("signature-input");
         if (window.signaturePad.isEmpty()) {
           input.value = "";
@@ -960,51 +979,67 @@
         } else {
           input.value = window.signaturePad.toDataURL();
           console.log("[CFP] Signature captured, length:", input.value.length);
+          // Trigger change event
+          const event = new Event("change", { bubbles: true });
+          input.dispatchEvent(event);
+          if (window.jQuery) $(input).trigger("change");
         }
-        // Trigger parsley validation
-        if (window.jQuery && $(input).parsley) {
-          $(input).parsley().validate();
+
+        // Manual validation check
+        if (shouldValidate) {
+          const errorContainer = document.getElementById("signature-error");
+          if (window.signaturePad.isEmpty()) {
+            if (errorContainer) {
+              errorContainer.innerHTML = "Please provide your signature";
+              errorContainer.style.display = "block";
+            }
+          } else {
+            if (errorContainer) {
+              errorContainer.innerHTML = "";
+              errorContainer.style.display = "none";
+            }
+          }
         }
       };
 
-      window.signaturePad.onEnd = window.updateSignatureInput;
-
       function resizeCanvas() {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        
+
         // Save the signature data before resizing
         const signatureData = window.signaturePad.toData();
-        
+
         canvas.width = canvas.offsetWidth * ratio;
         canvas.height = canvas.offsetHeight * ratio;
         canvas.getContext("2d").scale(ratio, ratio);
-        
+
         window.signaturePad.clear();
-        
+
         // Restore signature if it was not empty
         if (signatureData.length > 0) {
           window.signaturePad.fromData(signatureData);
         }
-        
-        window.updateSignatureInput();
+
+        window.updateSignatureInput(false);
       }
 
       window.addEventListener("resize", resizeCanvas);
       resizeCanvas();
 
       // Clear signature pad when form is reset
-      document.getElementById("petition-main-form").addEventListener("reset", () => {
-        setTimeout(() => {
-          window.signaturePad.clear();
-          window.updateSignatureInput();
-        }, 10);
-      });
+      document
+        .getElementById("petition-main-form")
+        .addEventListener("reset", () => {
+          setTimeout(() => {
+            window.signaturePad.clear();
+            window.updateSignatureInput(false);
+          }, 10);
+        });
 
       document
         .getElementById("clear-signature")
         .addEventListener("click", () => {
           window.signaturePad.clear();
-          window.updateSignatureInput();
+          window.updateSignatureInput(true);
         });
     </script>
   </body>

@@ -57,12 +57,25 @@ console.log("[CFP] Forms JS External File Loaded");
         
         formData.append("form_type", formTitle.trim());
 
-        // Extra safety check for Petition signature
-        if (formTitle.trim() === "Petition") {
+        // Extra safety check for any form containing a signature
+        if ($form.find('#signature-pad').length > 0 || $form.find('input[name="digitalSignature"]').length > 0) {
+            console.log("[CFP] Signature field detected, performing mandatory check...");
             var sig = formData.get('digitalSignature');
-            if (!sig || sig.length < 100) {
-                console.warn("[CFP] Signature check failed in JS, even after validation");
-                throw new Error("Digital signature is required. Please sign the pad again.");
+            
+            // window.signaturePad.isEmpty() is the most reliable check.
+            var isPadEmpty = true;
+            if (typeof window.signaturePad !== 'undefined') {
+                isPadEmpty = window.signaturePad.isEmpty();
+            } else {
+                isPadEmpty = (!sig || sig.length < 1000);
+            }
+            
+            if (isPadEmpty) {
+                console.warn("[CFP] Signature check failed - Pad is empty");
+                if (typeof window.updateSignatureInput === 'function') {
+                    window.updateSignatureInput(true);
+                }
+                throw new Error("Please provide your digital signature in the box provided.");
             }
         }
 
