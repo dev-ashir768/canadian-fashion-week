@@ -87,9 +87,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = $_POST;
     unset($data['form_type']); // Remove helper field
 
+    // Explicitly handle checkboxes for Petition form
+    if ($form_type === 'Petition') {
+        $data['showPublicly'] = isset($_POST['showPublicly']) ? 'Yes' : 'No';
+    }
+
     // Determine the user's email for the greeting
     $user_email = $_POST['email'] ?? '';
-    $first_name = $_POST['firstName'] ?? $_POST['first_name'] ?? 'Guest';
+    $first_name = $_POST['firstName'] ?? $_POST['first_name'] ?? $_POST['fullName'] ?? 'Guest';
+    if (strpos($first_name, ' ') !== false) {
+        $first_name = explode(' ', $first_name)[0];
+    }
 
     try {
         // 1. Save to CSV
