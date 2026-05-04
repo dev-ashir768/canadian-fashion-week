@@ -11,8 +11,9 @@ header('Content-Type: application/json');
 
 // Configuration
 $admin_email = 'info@canadianfashionw.com';
-$smtp_user = 'toolgram3@gmail.com';
-$smtp_pass = 'fihwrjdzscwhxixy';
+$smtp_host = 'mail.canadianfashionw.com';
+$smtp_user = 'info@canadianfashionw.com';
+$smtp_pass = 'Canadianfashionp2026!';
 
 // PHPMailer configuration
 use PHPMailer\PHPMailer\PHPMailer;
@@ -27,7 +28,7 @@ require 'PHPMailer/SMTP.php';
  */
 function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Project', $attachments = [])
 {
-    global $smtp_user, $smtp_pass;
+    global $smtp_host, $smtp_user, $smtp_pass;
     $mail = new PHPMailer(true);
     $mail->SMTPDebug = 2;
     $mail->Debugoutput = function ($str, $level) {
@@ -37,12 +38,21 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Proje
 
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = $smtp_host;
         $mail->SMTPAuth = true;
         $mail->Username = $smtp_user;
         $mail->Password = $smtp_pass;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
+
+        // Bypass SSL certificate verification (common for custom mail servers)
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
 
         $mail->setFrom($smtp_user, $from_name);
         $mail->addAddress($to);
@@ -81,10 +91,10 @@ function sendEmail($to, $subject, $message, $from_name = 'Canadian Fashion Proje
 
         $mail->send();
         return true;
-    } catch (Exception $e) {
+    } catch (\Throwable $e) {
         $errorLogPath = dirname(__DIR__) . '/data/smtp_error.log';
         file_put_contents($errorLogPath, date('Y-m-d H:i:s') . " Error: " . $e->getMessage() . PHP_EOL, FILE_APPEND);
-        throw new Exception("Mailer Error: {$mail->ErrorInfo}");
+        throw new \Exception("Mailer Error: {$mail->ErrorInfo} | " . $e->getMessage());
     }
 }
 
@@ -176,6 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // 1. Save to CSV
         $dataDir = dirname(__DIR__) . '/data';
+        file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: CSV Start. DataDir: $dataDir" . PHP_EOL, FILE_APPEND);
         if (!file_exists($dataDir)) {
             mkdir($dataDir, 0755, true);
         }
@@ -213,6 +224,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             fputcsv($file_handle, $row);
             fclose($file_handle);
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: CSV Saved to $csv_file" . PHP_EOL, FILE_APPEND);
+        } else {
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " | Error: Could not open CSV file $csv_file" . PHP_EOL, FILE_APPEND);
         }
 
         // 2. Admin Notification Email Template
@@ -291,7 +305,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: Sending Admin Email to $admin_email" . PHP_EOL, FILE_APPEND);
         sendEmail($admin_email, $admin_subject, $admin_email_content, 'CFP Notification System', $email_attachments);
+        file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: Admin Email Sent" . PHP_EOL, FILE_APPEND);
 
         // 2. User Confirmation Email Template
         if (!empty($user_email)) {
@@ -366,12 +382,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </table>
             </body>";
 
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: Sending User Email to $user_email" . PHP_EOL, FILE_APPEND);
             sendEmail($user_email, $user_subject, $user_email_content, 'Canadian Fashion Project');
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " | Step: User Email Sent" . PHP_EOL, FILE_APPEND);
         }
 
         echo json_encode(['status' => 'success', 'message' => 'Your message has been sent successfully!']);
         exit();
-    } catch (Exception $e) {
+    } catch (\Throwable $e) {
+        error_log("Form Error: " . $e->getMessage());
         echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         exit();
     }
