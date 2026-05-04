@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guestlist | Canadian Fashion Project</title>
+    <title>Designers | Canadian Fashion Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +16,9 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="/images/white-logo.png" type="image/x-icon" />
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <style type="text/tailwindcss">
       @theme {
         --font-sans: "Poppins", sans-serif;
@@ -24,7 +26,7 @@
     </style>
   </head>
 
-  <body>
+  <body class="bg-white text-black font-sans selection:bg-black/10">
     <!-- Header Layer -->
     <header
       id="main-header"
@@ -74,6 +76,7 @@
           </div>
         </button>
       </div>
+
       <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
         <a
           href="designers.html"
@@ -128,7 +131,6 @@
 
     <script>
       const header = document.getElementById("main-header");
-      const logo = document.getElementById("header-logo");
       const navToggle = document.getElementById("nav-toggle");
       const navClose = document.getElementById("nav-close");
       const sideNav = document.getElementById("side-nav");
@@ -143,143 +145,161 @@
       navToggle.addEventListener("click", toggleNav);
       navClose.addEventListener("click", toggleNav);
       navOverlay.addEventListener("click", toggleNav);
-
-      window.onscroll = function () {
-        if (window.scrollY > 50) {
-          header.classList.add("bg-white", "shadow-md", "py-3");
-          header.classList.remove("py-6");
-        } else {
-          header.classList.remove("bg-white", "shadow-md", "py-3");
-          header.classList.add("py-6");
-        }
-      };
     </script>
 
-    <main class="pt-40 pb-24 bg-white min-h-screen">
-      <div class="container mx-auto">
-        <!-- Hero Block -->
-        <div class="mb-16 animate-fade-in-up">
+    <!-- Page Content -->
+    <main>
+      <!-- Hero Section -->
+      <section class="relative pt-40 pb-24 bg-white border-b border-gray-50">
+        <div class="container mx-auto px-6 text-center animate-fade-in-up">
           <p
-            class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-6 font-bold"
+            class="text-[10px] tracking-[0.5em] text-gray-400 uppercase mb-4 font-medium"
           >
-            Canadian Fashion Project — Exclusive Access
+            2026 Season
           </p>
           <h1
-            class="text-5xl md:text-7xl font-bold text-black tracking-tighter leading-[1] uppercase mb-2"
+            class="text-5xl md:text-8xl font-black text-black uppercase tracking-tighter mb-8 leading-none"
           >
-            Guestlist.
+            Designers Lineup
           </h1>
-        </div>
-
-        <!-- Invite-Only Notice -->
-        <div
-          class="border-t border-gray-200 pt-12 mb-20 animate-fade-in-up max-w-3xl"
-          style="animation-delay: 0.1s"
-        >
+          <div class="w-20 h-0.5 bg-pink-600 mx-auto mb-10"></div>
           <p
-            class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-6 font-bold"
+            class="text-gray-500 text-xs md:text-sm max-w-xl mx-auto uppercase tracking-[0.2em] leading-loose"
           >
-            By Invitation Only
-          </p>
-          <p
-            class="text-gray-600 text-[15px] md:text-lg leading-relaxed tracking-wide mb-6"
-          >
-            Canadian Fashion Project is an exclusive, invite-only event.
-            Attendance is curated for designers, press, industry professionals,
-            and invited guests.
-          </p>
-          <p
-            class="text-gray-600 text-[15px] md:text-lg leading-relaxed tracking-wide"
-          >
-            Subscribe below to receive ticket updates and be considered for
-            future invitations when they become available.
+            A selection of designers presenting their work at our event.
           </p>
         </div>
+      </section>
 
-        <!-- Subscription Form -->
-        <div class="animate-fade-in-up max-w-2xl" style="animation-delay: 0.2s">
-          <p
-            class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-12 font-bold"
+      <!-- Designers Grid Section - Improved Logo Handling -->
+      <section class="py-24 bg-white text-black">
+        <div class="container mx-auto px-4">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8"
           >
-            Request Ticket Updates
-          </p>
-          <form
-            method="POST"
-            data-cfp-form
-            data-form-name="Guestlist"
-            data-parsley-validate
-            novalidate
-            class="space-y-16"
-          >
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
-              <div class="relative group">
-                <input
-                  type="text"
-                  name="firstName"
-                  required
-                  placeholder="FIRST NAME"
-                  class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
-                />
-              </div>
-              <div class="relative group">
-                <input
-                  type="text"
-                  name="lastName"
-                  required
-                  placeholder="LAST NAME"
-                  class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
-                />
-              </div>
-            </div>
-
-            <div class="relative group">
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="EMAIL ADDRESS"
-                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase"
-              />
-            </div>
-
-            <div class="relative group">
-              <select
-                name="role"
-                required
-                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors text-gray-500 uppercase appearance-none cursor-pointer"
+            <!-- Designer 1: Sherwin Darrel (SD Logo) -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-8 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
-                <option value="" disabled selected>I AM A...</option>
-                <option value="general" class="text-black">
-                  General Guest
-                </option>
-                <option value="press" class="text-black">Press / Media</option>
-                <option value="designer" class="text-black">Designer</option>
-                <option value="industry" class="text-black">
-                  Industry Professional
-                </option>
-              </select>
+                <!-- Using invert for white logos on black containers, or just keeping original if it fits -->
+                <img
+                  src="images/designers/designer-1.png"
+                  alt="Sherwin Darrel"
+                  class="w-full h-full object-contain brightness-200 transition-all duration-700"
+                />
+              </div>
+              <!-- <div class="text-center">
+                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
+                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
+                  Sherwin Darrel
+                </h3>
+                <p
+                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
+                >
+                  Luxury Footwear
+                </p>
+              </div> -->
             </div>
 
-            <div class="relative group">
-              <textarea
-                name="comments"
-                required
-                data-parsley-required-message="Please provide a brief message or comment."
-                placeholder="COMMENTS / MESSAGE"
-                rows="3"
-                class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors placeholder:text-gray-500 uppercase resize-none"
-              ></textarea>
+            <!-- Designer 2: Tarami Menswear (Tarami Logo) -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-8 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/designers/designer-2.png"
+                  alt="Tarami Menswear"
+                  class="w-full h-full object-contain brightness-200 transition-all duration-700"
+                />
+              </div>
+              <!-- <div class="text-center">
+                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
+                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
+                  Tarami Menswear
+                </h3>
+                <p
+                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
+                >
+                  Tailored Luxury
+                </p>
+              </div> -->
             </div>
 
-            <button
-              type="submit"
-              class="bg-black text-white px-16 py-5 rounded-full text-[13px] tracking-[0.4em] font-bold hover:bg-black/80 transition-all uppercase cursor-pointer"
-            >
-              Subscribe
-            </button>
-          </form>
+            <!-- Designer 3: Ocys Line -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/designers/designer-3.png"
+                  alt="Ocys Line"
+                  class="w-full h-full object-contain transition-all duration-700"
+                />
+              </div>
+              <!-- <div class="text-center">
+                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
+                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
+                  Ocys Line
+                </h3>
+                <p
+                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
+                >
+                  Contemporary Edge
+                </p>
+              </div> -->
+            </div>
+
+            <!-- Designer 4: Treble -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/designers/designer-4.png"
+                  alt="Treble"
+                  class="w-full h-full object-contain transition-all duration-700"
+                />
+              </div>
+              <!-- <div class="text-center">
+                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
+                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
+                  Treble
+                </h3>
+                <p
+                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
+                >
+                  Experimental Street
+                </p>
+              </div> -->
+            </div>
+
+            <!-- Designer 5: Treble -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/designers/designer-5.png"
+                  alt="Treble"
+                  class="w-full h-full object-contain transition-all duration-700"
+                />
+              </div>
+              <!-- <div class="text-center">
+                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
+                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
+                  Treble
+                </h3>
+                <p
+                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
+                >
+                  Experimental Street
+                </p>
+              </div> -->
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
 
     <!-- Footer Section -->
@@ -424,6 +444,25 @@
         </div>
       </div>
     </footer>
+
+    <!-- Global Styles -->
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+    </style>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
