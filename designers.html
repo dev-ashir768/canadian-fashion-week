@@ -135,6 +135,9 @@
       const navClose = document.getElementById("nav-close");
       const sideNav = document.getElementById("side-nav");
       const navOverlay = document.getElementById("nav-overlay");
+      const line1 = document.getElementById("line-1");
+      const line2 = document.getElementById("line-2");
+      const logo = document.getElementById("header-logo");
 
       function toggleNav() {
         sideNav.classList.toggle("active");
@@ -145,6 +148,34 @@
       navToggle.addEventListener("click", toggleNav);
       navClose.addEventListener("click", toggleNav);
       navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+          // Ensure logo is visible on white bg
+          // logo.classList.add("invert");
+          line1.classList.add("bg-black");
+          line1.classList.remove("bg-white");
+          line2.classList.add("bg-black");
+          line2.classList.remove("bg-white");
+        } else {
+          // If the hero is white, we might still want it to look "clean"
+          // but following the "other headers" pattern:
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+          // If hero is white, keep logo inverted and lines black
+          // unless you want them white initially (for dark heroes)
+          // Since this page has a white hero, we keep them visible.
+        }
+      };
+      
+      // Initialize state for white background page
+      if (window.scrollY <= 50) {
+          // logo.classList.add("invert");
+          line1.classList.add("bg-black");
+          line2.classList.add("bg-black");
+      }
     </script>
 
     <!-- Page Content -->
