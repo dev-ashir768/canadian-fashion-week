@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Designers | Canadian Fashion Project</title>
+    <title>Creative Partners | Canadian Fashion Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -79,9 +79,14 @@
 
       <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
         <a
-          href="designers.html"
+          href="creative-partners.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Designers</a
+          >Creative Partners</a
+        >
+        <a
+          href="guestlist.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Guestlist</a
         >
         <a
           href="schedule.html"
@@ -92,31 +97,6 @@
           >
         </a>
         <a
-          href="guestlist.html"
-          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Guestlist</a
-        >
-        <a
-          href="privacy-policy.html"
-          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Privacy Policy</a
-        >
-        <a
-          href="accessibility.html"
-          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Accessibility</a
-        >
-        <a
-          href="contact-us.html"
-          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Contact</a
-        >
-        <a
-          href="about.html"
-          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >About</a
-        >
-        <a
           href="application.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
           >Application</a
@@ -125,6 +105,26 @@
           href="petition.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
           >Petition</a
+        >
+        <a
+          href="accessibility.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Accessibility</a
+        >
+        <a
+          href="about.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >About Us</a
+        >
+        <a
+          href="contact-us.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Contact</a
+        >
+        <a
+          href="privacy-policy.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Privacy Policy</a
         >
       </div>
     </nav>
@@ -191,190 +191,161 @@
           <h1
             class="text-5xl md:text-8xl font-black text-black uppercase tracking-tighter mb-8 leading-none"
           >
-            Designers Lineup
+            Creative Partners
           </h1>
           <div class="w-20 h-0.5 bg-pink-600 mx-auto mb-10"></div>
           <p
             class="text-gray-500 text-xs md:text-sm max-w-xl mx-auto uppercase tracking-[0.2em] leading-loose"
           >
-            A selection of designers presenting their work at our event.
+            Meet the talented designers, artists, and media partners bringing our vision to life.
           </p>
         </div>
       </section>
 
-      <!-- Designers Grid Section - Improved Logo Handling -->
+      <!-- ===================== DESIGNERS SECTION ===================== -->
       <section class="py-24 bg-white text-black">
         <div class="container mx-auto px-4">
+          <!-- Category Header -->
+          <div class="text-center mb-16 animate-fade-in-up">
+            <p class="text-[10px] tracking-[0.5em] text-gray-400 uppercase mb-4 font-medium">Category</p>
+            <h2 class="text-3xl md:text-5xl font-black text-black uppercase tracking-tighter mb-6 leading-none">Designers</h2>
+            <div class="w-16 h-0.5 bg-pink-600 mx-auto"></div>
+          </div>
+
+          <!-- Designers Grid -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 max-w-5xl mx-auto"
           >
-            <!-- Designer 1: Sherwin Darrel (SD Logo) -->
-            <div class="group flex flex-col items-center">
-              <div
-                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-8 transition-all duration-700 shadow-2xl hover:-translate-y-2"
-              >
-                <!-- Using invert for white logos on black containers, or just keeping original if it fits -->
-                <img
-                  src="images/designers/designer-1.png"
-                  alt="Sherwin Darrel"
-                  class="w-full h-full object-contain brightness-200 transition-all duration-700"
-                />
-              </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Sherwin Darrel
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Luxury Footwear
-                </p>
-              </div> -->
-            </div>
-
-            <!-- Designer 2: Tarami Menswear (Tarami Logo) -->
+            <!-- Designer 1 -->
             <div class="group flex flex-col items-center">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-8 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-2.png"
-                  alt="Tarami Menswear"
+                  src="images/creative-partners/designer-1.png"
+                  alt="Designer 1"
                   class="w-full h-full object-contain brightness-200 transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Tarami Menswear
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Tailored Luxury
-                </p>
-              </div> -->
             </div>
 
-            <!-- Designer 3: Ocys Line -->
+            <!-- Designer 2 -->
+            <div class="group flex flex-col items-center">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-8 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/creative-partners/designer-2.png"
+                  alt="Designer 2"
+                  class="w-full h-full object-contain brightness-200 transition-all duration-700"
+                />
+              </div>
+            </div>
+
+            <!-- Designer 3 -->
             <div class="group flex flex-col items-center">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-3.png"
-                  alt="Ocys Line"
+                  src="images/creative-partners/designer-3.png"
+                  alt="Designer 3"
                   class="w-full h-full object-contain transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Ocys Line
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Contemporary Edge
-                </p>
-              </div> -->
             </div>
 
-            <!-- Designer 4: Treble -->
+            <!-- Designer 4 -->
             <div class="group flex flex-col items-center">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-4.png"
-                  alt="Treble"
+                  src="images/creative-partners/designer-4.png"
+                  alt="Designer 4"
                   class="w-full h-full object-contain transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Treble
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Experimental Street
-                </p>
-              </div> -->
             </div>
 
-            <!-- Designer 5: Treble -->
+            <!-- Designer 5 -->
             <div class="group flex flex-col items-center">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-5.png"
-                  alt="Treble"
+                  src="images/creative-partners/designer-5.png"
+                  alt="Designer 5"
                   class="w-full h-full object-contain transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Treble
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Experimental Street
-                </p>
-              </div> -->
             </div>
 
-            <!-- Designer 6: Treble -->
+            <!-- Designer 6 -->
             <div class="group flex flex-col items-center">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-6.jpeg"
-                  alt="Treble"
+                  src="images/creative-partners/designer-6.jpeg"
+                  alt="Designer 6"
                   class="w-full h-full object-contain transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Treble
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Experimental Street
-                </p>
-              </div> -->
             </div>
+          </div>
+        </div>
+      </section>
 
-              <!-- Designer 7: Treble -->
-            <div class="group flex flex-col items-center">
+      <!-- ===================== MAKE UP ARTIST SECTION ===================== -->
+      <section class="py-24 bg-gray-50 text-black">
+        <div class="container mx-auto px-4">
+          <!-- Category Header -->
+          <div class="text-center mb-16 animate-fade-in-up">
+            <p class="text-[10px] tracking-[0.5em] text-gray-400 uppercase mb-4 font-medium">Category</p>
+            <h2 class="text-3xl md:text-5xl font-black text-black uppercase tracking-tighter mb-6 leading-none">Make Up Artist</h2>
+            <div class="w-16 h-0.5 bg-pink-600 mx-auto"></div>
+          </div>
+
+          <!-- Make Up Artist Grid -->
+          <div class="flex justify-center">
+            <div class="group flex flex-col items-center w-full max-w-sm">
               <div
                 class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
               >
                 <img
-                  src="images/designers/designer-7.jpeg"
-                  alt="Treble"
+                  src="images/creative-partners/make-up-artist-1.jpeg"
+                  alt="Make Up Artist"
                   class="w-full h-full object-contain transition-all duration-700"
                 />
               </div>
-              <!-- <div class="text-center">
-                <div class="w-6 h-[1px] bg-pink-600 mx-auto mb-6"></div>
-                <h3 class="text-lg font-bold uppercase tracking-tighter mb-2">
-                  Treble
-                </h3>
-                <p
-                  class="text-[10px] tracking-[0.3em] text-gray-400 uppercase font-semibold"
-                >
-                  Experimental Street
-                </p>
-              </div> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== OFFICIAL MEDIA PARTNER SECTION ===================== -->
+      <section class="py-24 bg-white text-black">
+        <div class="container mx-auto px-4">
+          <!-- Category Header -->
+          <div class="text-center mb-16 animate-fade-in-up">
+            <p class="text-[10px] tracking-[0.5em] text-gray-400 uppercase mb-4 font-medium">Category</p>
+            <h2 class="text-3xl md:text-5xl font-black text-black uppercase tracking-tighter mb-6 leading-none">Official Media Partner</h2>
+            <div class="w-16 h-0.5 bg-pink-600 mx-auto"></div>
+          </div>
+
+          <!-- Media Partner Grid -->
+          <div class="flex justify-center">
+            <div class="group flex flex-col items-center w-full max-w-sm">
+              <div
+                class="relative w-full aspect-square overflow-hidden flex items-center justify-center p-0 transition-all duration-700 shadow-2xl hover:-translate-y-2"
+              >
+                <img
+                  src="images/creative-partners/official-media-partner.png"
+                  alt="Official Media Partner"
+                  class="w-full h-full object-contain transition-all duration-700"
+                />
+              </div>
             </div>
           </div>
         </div>

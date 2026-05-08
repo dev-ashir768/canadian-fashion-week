@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us | Canadian Fashion Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +11,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/guillaumepotier/Parsley.js@2.9.2/src/parsley.css"
+    />
     <link rel="icon" href="/images/white-logo.png" type="image/x-icon" />
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -21,9 +24,9 @@
         --font-sans: "Poppins", sans-serif;
       }
     </style>
-</head>
-<body>
-     <!-- Header Layer -->
+  </head>
+  <body>
+    <!-- Header Layer -->
     <header
       id="main-header"
       class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 md:px-12 lg:px-16 transition-all duration-500 transition-colors"
@@ -34,7 +37,7 @@
             id="header-logo"
             src="images/white-logo.png"
             alt="Canadian Fashion Project"
-           class="h-8 md:h-10 lg:h-16 transition-all duration-500"
+            class="h-8 md:h-10 lg:h-16 transition-all duration-500"
           />
         </a>
       </div>
@@ -58,7 +61,6 @@
           ></span>
         </div>
       </button>
-      </nav>
     </header>
 
     <!-- Side Navigation -->
@@ -83,11 +85,16 @@
         </button>
       </div>
 
-    <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
+      <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
         <a
-          href="designers.html"
+          href="creative-partners.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Designers</a
+          >Creative Partners</a
+        >
+        <a
+          href="guestlist.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >Guestlist</a
         >
         <a
           href="schedule.html"
@@ -98,14 +105,14 @@
           >
         </a>
         <a
-          href="guestlist.html"
+          href="application.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Guestlist</a
+          >Application</a
         >
         <a
-          href="privacy-policy.html"
+          href="petition.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >Privacy Policy</a
+          >Petition</a
         >
         <a
           href="accessibility.html"
@@ -113,25 +120,25 @@
           >Accessibility</a
         >
         <a
+          href="about.html"
+          class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
+          >About Us</a
+        >
+        <a
           href="contact-us.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
           >Contact</a
         >
         <a
-          href="about.html"
+          href="privacy-policy.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
-          >About</a>
-        <a href="application.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Application</a>
-        <a href="petition.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Petition</a>
+          >Privacy Policy</a
+        >
       </div>
-
-      
     </nav>
 
     <script>
       const header = document.getElementById("main-header");
-      const logo = document.getElementById("header-logo");
-
       const navToggle = document.getElementById("nav-toggle");
       const navClose = document.getElementById("nav-close");
       const sideNav = document.getElementById("side-nav");
@@ -157,36 +164,24 @@
         }
       };
     </script>
-    <main class="pt-40 pb-24 bg-white min-h-[70vh]">
-      <div class="container mx-auto">
-        <!-- Hero Block -->
-        <div class="mb-32 animate-fade-in-up">
-          <p
-            class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-6 font-bold"
-          >
-            Contact — Canadian Fashion Project
+
+    <main class="pt-32 pb-24 bg-white min-h-screen">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <div class="animate-fade-in-up" style="animation-delay: 0.1s">
+          <p class="text-[10px] md:text-xs tracking-[0.3em] text-gray-400 font-bold uppercase mb-4">
+            Contact &mdash; Canadian Fashion Project
           </p>
-          <h1
-            class="text-5xl md:text-7xl lg:text-7xl font-bold text-black tracking-tighter leading-[1] uppercase mb-2"
-          >
+          <h1 class="text-6xl md:text-8xl lg:text-[7rem] font-black text-black uppercase tracking-tighter mb-16">
             Get In Touch.
           </h1>
-        </div>
-
-        <!-- Contact Blocks -->
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 border-t border-gray-400 pt-5 mb-10"
-        >
-          <div class="animate-fade-in-up" style="animation-delay: 0.1s">
-            <p
-              class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-8 font-bold"
-            >
+          
+          <div class="border-b border-gray-200 w-full mb-16"></div>
+          
+          <div class="mb-20">
+            <p class="text-[11px] tracking-[0.3em] text-gray-400 font-bold uppercase mb-4">
               General Inquiries
             </p>
-            <a
-              href="mailto:info@canadianfashionproject.com"
-              class="text-xl lg:text-2xl font-bold text-black border-b-2 border-transparent hover:border-black transition-all duration-500 pb-3 block md:inline-block truncate"
-            >
+            <a href="mailto:info@canadianfashionproject.com" class="text-xl md:text-3xl font-bold text-black hover:opacity-70 transition-opacity">
               info@canadianfashionproject.com
             </a>
           </div>
@@ -194,12 +189,14 @@
 
         <!-- Inquiry Form -->
         <div class="animate-fade-in-up" style="animation-delay: 0.3s">
-          <!-- <p
-            class="text-[13px] tracking-[0.4em] text-gray-400 uppercase mb-12 font-bold"
+          <form
+            method="POST"
+            data-cfp-form
+            data-form-name="Newsletter"
+            data-parsley-validate
+            novalidate
+            class="space-y-16"
           >
-            Inquiry Form
-          </p> -->
-          <form method="POST" data-cfp-form data-form-name="Newsletter" data-parsley-validate novalidate class="space-y-16">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
               <div class="relative group">
                 <input
@@ -247,8 +244,12 @@
                 required
                 class="w-full bg-transparent border-b border-gray-200 py-4 text-[13px] tracking-[0.3em] outline-none focus:border-black transition-colors text-gray-500 uppercase appearance-none cursor-pointer"
               >
-                <option value="" disabled selected class="text-gray-500">INQUIRY TYPE</option>
-                <option value="general" class="text-black">General Inquiry</option>
+                <option value="" disabled selected class="text-gray-500">
+                  INQUIRY TYPE
+                </option>
+                <option value="general" class="text-black">
+                  General Inquiry
+                </option>
                 <option value="press" class="text-black">Press</option>
                 <option value="designer" class="text-black">Designer</option>
               </select>
@@ -275,7 +276,7 @@
       </div>
     </main>
 
-      <!-- Footer Section -->
+    <!-- Footer Section -->
 
     <footer
       class="bg-black text-white pt-20 pb-12 px-6 md:px-12 lg:px-13 border-t border-white/10"
@@ -288,7 +289,14 @@
           >
             Stay In The Know
           </h2>
-          <form method="POST" data-cfp-form data-form-name="Newsletter" data-parsley-validate novalidate class="space-y-12">
+          <form
+            method="POST"
+            data-cfp-form
+            data-form-name="Newsletter"
+            data-parsley-validate
+            novalidate
+            class="space-y-12"
+          >
             <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
               <div class="flex-1 relative">
                 <input
@@ -335,11 +343,15 @@
                 <a
                   href="about.html"
                   class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
-                  >About</a>
+                  >About Us</a
+                >
               </li>
               <li>
-                <a href="application.html" class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase">Application</a>
-        <a href="petition.html" class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover">Petition</a>
+                <a
+                  href="application.html"
+                  class="text-[13px] tracking-[0.3em] font-medium hover:opacity-60 transition-opacity uppercase"
+                  >Application</a
+                >
               </li>
               <li>
                 <a
@@ -377,11 +389,11 @@
             class="text-[9px] md:text-[10px] leading-relaxed text-white tracking-[0.15em]"
           >
             By subscribing you consent to receive newsletters, updates, special
-            offers, and other updates from Canadian Fashion Project: The Shows, and
-            their respective partners, licensees, affiliates, and subsidiaries.
-            You may withdraw your consent at any time.
+            offers, and other updates from Canadian Fashion Project: The Shows,
+            and their respective partners, licensees, affiliates, and
+            subsidiaries. You may withdraw your consent at any time.
             <a
-               href="/privacy-policy.html"
+              href="/privacy-policy.html"
               class="underline underline-offset-4 hover:text-white transition-colors"
               >Privacy Policy</a
             >.
@@ -406,10 +418,10 @@
         </div>
       </div>
     </footer>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/parsleyjs@2.9.2/dist/parsley.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/forms.js?v=1.4"></script>
-</body>
+  </body>
 </html>
