@@ -255,6 +255,7 @@
                   Photographer
                 </option>
                 <option value="sponsor" class="text-black">Sponsor</option>
+                <option value="stylist" class="text-black">Stylist</option>
                 <option value="videographer" class="text-black">
                   Videographer
                 </option>
@@ -609,6 +610,11 @@
           } else if (val === "designer") {
             $fileContainer.slideDown();
             $fileLabel.text("Upload Look Book *");
+            $fileInput.attr("required", true);
+            $fileInput.attr("accept", "image/*,.pdf");
+          } else if (val === "stylist") {
+            $fileContainer.slideDown();
+            $fileLabel.text("Upload Portfolio *");
             $fileInput.attr("required", true);
             $fileInput.attr("accept", "image/*,.pdf");
           } else {
