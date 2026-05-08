@@ -89,7 +89,7 @@
       </div>
 
       <div class="flex flex-col gap-4 xl:gap-10 mt-4 md:mt-1 xl:mt-8">
-                        <a
+            <a
           href="creative-partners.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
           >Creative Partners</a
@@ -136,7 +136,274 @@
           href="privacy-policy.html"
           class="text-xl font-bold text-black uppercase tracking-tighter border-b border-gray-300 sm:pb-4 sm:pt-0 pb-4 pt-4 nav-bounce-hover"
           >Privacy Policy</a
-        > -->
+        >
+      </div>
+    </nav>
+
+    <script>
+      const header = document.getElementById("main-header");
+      const logo = document.getElementById("header-logo");
+      const menuText = document.getElementById("menu-text");
+      const line1 = document.getElementById("line-1");
+      const line2 = document.getElementById("line-2");
+
+      const navToggle = document.getElementById("nav-toggle");
+      const navClose = document.getElementById("nav-close");
+      const sideNav = document.getElementById("side-nav");
+      const navOverlay = document.getElementById("nav-overlay");
+
+      function toggleNav() {
+        sideNav.classList.toggle("active");
+        navOverlay.classList.toggle("active");
+        document.body.classList.toggle("overflow-hidden");
+      }
+
+      navToggle.addEventListener("click", toggleNav);
+      navClose.addEventListener("click", toggleNav);
+      navOverlay.addEventListener("click", toggleNav);
+
+      window.onscroll = function () {
+        if (window.scrollY > 50) {
+          header.classList.add("bg-white", "shadow-md", "py-3");
+          header.classList.remove("py-6");
+          logo.src = "images/white-logo.png";
+          line1.classList.replace("bg-white", "bg-black");
+          line2.classList.replace("bg-white", "bg-black");
+        } else {
+          header.classList.remove("bg-white", "shadow-md", "py-3");
+          header.classList.add("py-6");
+          logo.src = "images/white-logo.png";
+          line1.classList.replace("bg-black", "bg-white");
+          line2.classList.replace("bg-black", "bg-white");
+        }
+      };
+    </script>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen w-full overflow-hidden flex flex-col">
+      <!-- Background Images with Overlay -->
+      <!-- Background Images with Overlay -->
+      <div class="absolute inset-0 z-0">
+        <!-- Slide 1 (Active by default) -->
+        <picture>
+          <source
+            srcset="/images/portraitbanner.png"
+            media="(max-width: 576px)"
+          />
+          <img
+            src="/images/landscapebanner.png"
+            id="slide-0"
+            alt="Fashion Project Banner 1"
+            class="absolute object-cover transition-opacity duration-1000 opacity-100 w-full h-full"
+          />
+        </picture>
+        <!-- Slide 2 (Hidden by default) -->
+        <picture>
+          <source
+            srcset="/images/portraitbanner.png"
+            media="(max-width: 576px)"
+          />
+          <img
+            src="/images/landscapebanner.png"
+            id="slide-1"
+            alt="Fashion Project Banner 2"
+            class="absolute object-cover transition-opacity duration-1000 opacity-0 w-full h-full"
+          />
+        </picture>
+
+        <!-- Multi-layer gradient -->
+        <!-- <div
+          class="absolute inset-0 bg-black/30 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
+        ></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none"
+        ></div> -->
+      </div>
+
+      <!-- Central Content Layer -->
+      <main
+        class="relative z-10 flex-grow flex flex-col items-center justify-center text-center px-6 md:px-12 pointer-events-none"
+      >
+        <!-- <div class="max-w-4xl animate-fade-in-up">
+          <h1
+            class="text-white text-2xl md:text-3xl lg:text-5xl font-bold mb-6 uppercase"
+          >
+            CFP SS2026 Season Schedule
+          </h1>
+          <p
+            class="text-white/90 text-[10px] md:text-xs lg:text-sm tracking-[0.25em] mb-12 uppercase font-medium max-w-2xl mx-auto"
+          >
+            Stay up to date on the latest schedule for the season
+          </p>
+          <a
+            href="schedule.html"
+            class="inline-block px-12 py-3.5 border border-white/80 text-white text-[10px] md:text-xs tracking-[0.3em] font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-500 uppercase"
+          >
+            Learn More
+          </a>
+        </div> -->
+      </main>
+
+      <!-- Slider Pagination (Bottom Right) -->
+      <!-- <div class="absolute bottom-12 right-10 md:right-16 z-20 flex gap-4">
+        <button
+          class="pagination-dot w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white cursor-pointer transition-all hover:scale-125"
+          data-index="0"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          class="pagination-dot w-2 md:w-2.5 h-2 md:h-2.5 rounded-full border border-white/60 cursor-pointer transition-all hover:border-white hover:scale-125"
+          data-index="1"
+          aria-label="Slide 2"
+        ></button>
+      </div> -->
+    </section>
+
+    <!-- Simplified Slideshow Script -->
+    <script>
+      let currentSlide = 0;
+      const slides = [
+        document.getElementById("slide-0"),
+        document.getElementById("slide-1"),
+      ];
+      const dots = document.querySelectorAll(".pagination-dot");
+
+      function showSlide(index) {
+        // Toggle opacity classes
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.replace("opacity-0", "opacity-100");
+          } else {
+            slide.classList.replace("opacity-100", "opacity-0");
+          }
+        });
+
+        // Toggle dot focus
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.add("bg-white");
+            dot.classList.remove("border", "border-white/60");
+          } else {
+            dot.classList.remove("bg-white");
+            dot.classList.add("border", "border-white/60");
+          }
+        });
+
+        currentSlide = index;
+      }
+
+      // Simple Click Events
+      dots.forEach((dot, i) => {
+        dot.onclick = () => showSlide(i);
+      });
+
+      // Simple Auto-cycle
+      setInterval(() => {
+        showSlide((currentSlide + 1) % slides.length);
+      }, 6000);
+
+      // Click to advance slide
+      const heroSlider = document.getElementById("hero-slider");
+      heroSlider.style.cursor = "pointer";
+      heroSlider.addEventListener("click", () => {
+        showSlide((currentSlide + 1) % slides.length);
+      });
+
+      // Touch swipe + tap support
+      let touchStartX = 0;
+      let touchStartY = 0;
+      heroSlider.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        },
+        { passive: true },
+      );
+      heroSlider.addEventListener(
+        "touchend",
+        (e) => {
+          const diffX = touchStartX - e.changedTouches[0].clientX;
+          const diffY = touchStartY - e.changedTouches[0].clientY;
+          if (Math.abs(diffX) > 50) {
+            // swipe
+            if (diffX > 0) {
+              showSlide((currentSlide + 1) % slides.length);
+            } else {
+              showSlide((currentSlide - 1 + slides.length) % slides.length);
+            }
+          } else if (Math.abs(diffX) < 10 && Math.abs(diffY) < 10) {
+            // tap — advance to next slide
+            showSlide((currentSlide + 1) % slides.length);
+          }
+        },
+        { passive: true },
+      );
+    </script>
+
+    <!-- Basic Animation Utilities -->
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 1s ease-out forwards;
+      }
+    </style>
+
+    <!-- Experience Section -->
+    <section class="bg-white py-24 lg:py-25">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <!-- Image Column -->
+          <div class="flex-1 w-full order-2 lg:order-1">
+            <div class="relative group">
+              <!-- Decorative border -->
+              <div
+                class="absolute -top-4 -left-4 w-full h-full border border-gray-200 -z-10 transition-all duration-700 group-hover:top-0 group-hover:left-0"
+              ></div>
+              <img
+                src="images/runway.png"
+                alt="Fashion Project Experience"
+                class="w-full aspect-[4/5] object-cover shadow-2xl animate-fade-in-up"
+              />
+            </div>
+          </div>
+
+          <!-- Text Column -->
+          <div class="flex-1 order-1 lg:order-2">
+            <div class="max-w-xl animate-fade-in-up">
+              <p
+                class="text-[10px] tracking-[0.4em] text-gray-400 uppercase mb-5 font-bold"
+              >
+                The Spirit of CFP
+              </p>
+              <h2
+                class="text-4xl md:text-5xl lg:text-6xl font-bold text-black tracking-tight uppercase leading-[1.1] mb-8"
+              >
+                Elevating the Runway
+              </h2>
+              <div class="w-20 h-0.5 bg-black mb-10"></div>
+              <p
+                class="text-gray-600 text-[13px] md:text-base tracking-wide leading-loose mb-12"
+              >
+                Where tradition meets modern innovation. Explore the essence of
+                Canadian fashion as we showcase the labels defining tomorrow's
+                trends. From avant-garde creations to modern tailoring,
+                experience the creative pulse that drives the global industry.
+              </p>
+              <!-- <a
+                href="#"
+                class="inline-block bg-white border border-black text-black px-12 py-3.5 rounded-full text-[10px] tracking-[0.3em] font-bold hover:bg-black hover:text-white transition-all duration-500 uppercase cursor-pointer"
+              >
+                Find Out More
+              </a> -->
             </div>
           </div>
         </div>
